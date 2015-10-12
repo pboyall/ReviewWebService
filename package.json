@@ -1,0 +1,32 @@
+{
+  "name": "reviewwebservice",
+  "version": "1.0.0",
+  "description": "Review Web Service",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-jshint": "^1.11.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-typescript": "^2.9.2",
+    "gulp-uglify": "^1.4.1",
+    "merge2": "^0.3.6"
+  },
+  "devDependencies": {
+    "gulp-jshint": "^1.11.2",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-sass": "^2.0.4",
+    "gulp-typescript": "^2.9.2",
+    "jshint": "^2.8.0",
+    "tedious": "^1.12.3"
+  },
+  "scripts": {
+    "test": "1"
+  },
+  "keywords": [
+    "review",
+    "vx2"
+  ],
+  "author": "Peter Boyall",
+  "license": "ISC"
+}
