@@ -6,7 +6,8 @@ class TaskRepository{
     }
 
 save(TaskAssignment){
- 
+    //Hard coded SQL as proof of concept
+ _dbContext.
 }
 
 }
