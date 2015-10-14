@@ -28,6 +28,8 @@ module.exports.query = function (callback) {
  
 var Request = require('tedious').Request;
 
+//No checks on SQL - just a Proof of Concept this
+
 function executeStatement(sql, callback) {
     request = new Request(sql, function(err, rowCount) {
       if (err) {

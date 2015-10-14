@@ -13,9 +13,12 @@
     "merge2": "^0.3.6"
   },
   "devDependencies": {
+    "gulp-babel": "^5.2.1",
+    "gulp-concat": "^2.6.0",
     "gulp-jshint": "^1.11.2",
     "gulp-nodemon": "^2.0.4",
     "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.9.2",
     "jshint": "^2.8.0",
     "tedious": "^1.12.3"
