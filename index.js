@@ -3,23 +3,28 @@
 console.log("Being Web Service");
 
 
-var database = require('./Database.js');
+var database = require('./sqlite.js');
 
 //POC DB Query Code
 
-var callme = function () {
+var callmeandquit = function () {
     console.log("Done - exit");
     process.exit();
 };
 
-/*
+var callme = function () {
+    console.log("Done - keep running");
+};
+
+
 var sql = "select * from task";
 
-database.query(sql, callme);
+
+//database.query(sql, callme);
 
 //End POC
 
-*/
+
 
 //Initial Attempt at making a repository work
 

@@ -25,10 +25,9 @@ var connection;
 module.exports.query = function (sql, callback) {
     console.log('Query SQL: ' + sql);
     connection = new Connection(config);
-    console.log('got connection');
-    connection.on('connect', function (err) {
+    connection.on('connect', function (err, sql, callback) {
         // If no error, then good to go...
-        console.log("Execute statement: " + sql);
+        console.log("Conected - execute" + sql);
         executeStatement(sql, callback);
     });
 
@@ -72,19 +71,20 @@ var database = require('./Database.js');
 
 //POC DB Query Code
 
-var callme = function callme() {
+var callmeandquit = function callmeandquit() {
     console.log("Done - exit");
     process.exit();
 };
 
-/*
+var callme = function callme() {
+    console.log("Done - keep running");
+};
+
 var sql = "select * from task";
 
 database.query(sql, callme);
 
 //End POC
-
-*/
 
 //Initial Attempt at making a repository work
 
@@ -210,12 +210,9 @@ var taskRepository = (function () {
             //Hard coded SQL as proof of concept
             //_dbContext
             console.log('save');
-
             console.log('instance of ');
             console.log(Object.getPrototypeOf(theObject));
-
             //switch statement here when have more than one class
-
             var sql = "select * from task";
             this.dbContext.query(sql, callme);
         }

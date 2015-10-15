@@ -1,0 +1,13 @@
+{
+  "browsers": [
+    {
+      "name": "chrome",
+      "command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+      "version": "45.0.2454.101",
+      "re": {},
+      "type": "chrome",
+      "headless": false,
+      "profile": false
+    }
+  ]
+}

@@ -20,13 +20,17 @@ var connection;
 
 //No checks on SQL - just a Proof of Concept this
 
-module.exports.query = function (sql, callback) {
-    console.log('Query SQL: ' + sql);
+function getConnection() {
     connection = new Connection(config);
-    console.log('got connection');
-    connection.on('connect', function (err) {
+    return connection;
+}
+
+module.exports.ConnectAndQuery = function (sql, callback) {
+    console.log('Connect and Query SQL: ' + sql);
+    connection = getConnection();
+    connection.on('connect', function (err, sql, callback) {
         // If no error, then good to go...
-        console.log("Execute statement: " + sql);
+        console.log("Conected - execute" + sql);
         executeStatement(sql, callback);
     });
 
@@ -37,6 +41,8 @@ module.exports.query = function (sql, callback) {
     connection.on('debug', function (text) {
         console.log("Debug Connecting: " + text);
     });
+
+    callback();
 };
 
 function executeStatement(sql, callback) {

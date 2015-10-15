@@ -93,7 +93,7 @@ gulp.task('server', function (cb) {
     //Do the build here if desired
 
     //Change this to look at the build directory
-    exec('node build/js/index.js', function (err, stdout, stderr) {
+    exec('node build/js/all.js', function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
         cb(err);
