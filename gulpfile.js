@@ -18,8 +18,8 @@ gulp.task('scripts', function () {
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat("all.js"))
-        .pipe(sourcemaps.write("."));
-    //.pipe(gulp.dest('build/js'));
+        .pipe(sourcemaps.write("."))
+        .pipe(gulp.dest('build/js'));
 });
 
 // The default task (called when you run `gulp`)
@@ -57,7 +57,10 @@ gulp.task('sass', function () {
 
 gulp.task('javascript', function () {
     gulp.src(['*.js', '!vendor/**', '!gulpfile.js'])
-        //.pipe(uglify())
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(concat("all.js"))
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('build/js'));
 });
 
@@ -90,7 +93,7 @@ gulp.task('server', function (cb) {
     //Do the build here if desired
 
     //Change this to look at the build directory
-    exec('node index.js', function (err, stdout, stderr) {
+    exec('node build/js/index.js', function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
         cb(err);

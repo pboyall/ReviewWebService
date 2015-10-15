@@ -10,21 +10,16 @@ var taskRepository =
             this.dbContext = Options.dbContext;
         }
 
-        save(theObject) {
+        save(theObject, callme) {
             //Hard coded SQL as proof of concept
             //_dbContext
             console.log('save');
-
-            console.log('instance of ')
+            console.log('instance of ');
             console.log(Object.getPrototypeOf(theObject));
-
-
             //switch statement here when have more than one class
-
             var sql = "select * from task";
-            dbContext.query(sql, callme);
+            this.dbContext.query(sql, callme);
         }
-
     };
 
 module.exports = taskRepository;
