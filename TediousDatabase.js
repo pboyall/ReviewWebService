@@ -1,5 +1,3 @@
-var exports = module.exports = {};
-
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 
