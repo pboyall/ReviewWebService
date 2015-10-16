@@ -22,7 +22,7 @@ var connection;
 var database = function () {};
 
 //No checks on SQL - just a Proof of Concept this
-
+//The idea of this function is to let us swap in connection pooling later
 database.prototype.getConnection = function getConnection() {
     connection = new Connection(config);
     return connection;
@@ -61,7 +61,8 @@ function executeStatement(sql, callback) {
             //callback(rows);
             //return rows;
         }
-        connection.close();
+        //Not sure if this should be wrapped in its own function to allow for connection pooling.
+        //connection.close();
 
     });
     var rowcounter = 0;

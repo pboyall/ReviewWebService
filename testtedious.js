@@ -26,37 +26,40 @@ var myf = function myfunc(rows, rowCount) {
     console.log("End");
     console.log(Object.getPrototypeOf(rows));
     console.log(rows);
+    runRestOfServer();
 }
 db.ConnectAndQuery(sql, myf);
 
 //3 refers to WorkFlowProcessId = it's magic
 
-var taskrepo = new taskRepository({
-    WorkflowProcessId: 3,
-    dbContext: db
-});
+var runRestOfServer = function () {
 
-var _TaskId = 1;
-var _DateAssigned = '15/1/2015';
-var _GroupId = '1';
-var _AccessType = 1;
-var _NodeId = 1;
+    var taskrepo = new taskRepository({
+        WorkflowProcessId: 3,
+        dbContext: db
+    });
 
-var theTaskAssignment = new taskAssignment({
-    TaskId: _TaskId,
-    DateAssigned: _DateAssigned,
-    GroupId: _GroupId,
-    AccessType: _AccessType,
-    NodeId: _NodeId
-});
+    var _TaskId = 1;
+    var _DateAssigned = '15/1/2015';
+    var _GroupId = '1';
+    var _AccessType = 1;
+    var _NodeId = 1;
 
-console.log(theTaskAssignment.DateAssigned);
+    var theTaskAssignment = new taskAssignment({
+        TaskId: _TaskId,
+        DateAssigned: _DateAssigned,
+        GroupId: _GroupId,
+        AccessType: _AccessType,
+        NodeId: _NodeId
+    });
 
-//taskrepo.load(theTaskAssignment, myfunc);
+    console.log("Date Task Assigned : " + theTaskAssignment.DateAssigned);
+
+    taskrepo.load(theTaskAssignment, function () {});
 
 
-//taskrepo.save(theTaskAssignment, myfunc);
-
+    //taskrepo.save(theTaskAssignment, myfunc);
+}
 
 
 
