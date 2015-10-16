@@ -68,14 +68,21 @@ function executeStatement(sql, callback) {
     request.on('row', function (columns) {
         rowcounter++;
         console.log('Row' + rowcounter);
-        retval = retval + "{ "
-            //if (bDebug) {
+
+        var colval = "";
+        //if (bDebug) {
         columns.forEach(function (column) {
             //console.log('Col ' + column.metadata.colName + ' : ' + column.value);
-            retval = retval + column.metadata.colName + ' : ' + column.value + ",";
+            if (colval.length > 0) {
+                colval = colval + ","
+            }
+            colval = colval + column.metadata.colName + ' : ' + column.value;
         });
-        retval = retval + " },"
-            //}
+        if (retval.length > 0) {
+            retval = retval + ",";
+        }
+        retval = retval + "{" + colval + " }";
+        //}
     });
     /*
         request.on('done', function (rowCount, more, rows) {
@@ -94,7 +101,6 @@ function executeStatement(sql, callback) {
         console.log(retval);
         //callback(rows, rowCount);
         callback(retval, rowCount);
-
     });
     /*
         request.on('doneProc', function (rowCount, more, rows) {
@@ -105,12 +111,7 @@ function executeStatement(sql, callback) {
 
         });
     */
-
-
     connection.execSql(request);
-
-
-
 }
 
 module.exports = database;
