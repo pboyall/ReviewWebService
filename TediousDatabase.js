@@ -8,7 +8,8 @@ var config = {
     server: 'PW-000011',
     options: {
         encrypt: false,
-        database: 'ReviewProject'
+        database: 'ReviewProject',
+        rowCollectionOnDone: true
     }
 };
 
@@ -22,17 +23,19 @@ var database = function () {};
 database.prototype.getConnection = function getConnection() {
     connection = new Connection(config);
     return connection;
-}
+};
 
 
 
 database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
     console.log('Connect and Query SQL: ' + sql);
-    connection = getConnection();
-    connection.on('connect', function (err, sql, callback) {
+    var thesql = sql;
+    connection = this.getConnection();
+    connection.on('connect', function (err) {
         // If no error, then good to go...
         console.log("Conected - execute" + sql);
-        executeStatement(sql, callback);
+        rows = executeStatement(sql, callback);
+        return rows;
     });
 
     connection.on('error', function (err) {
@@ -50,25 +53,28 @@ database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
 
 function executeStatement(sql, callback) {
     console.log('execute statement');
-    request = new Request(sql, function (err, rowCount) {
+    request = new Request(sql, function (err, rowCount, rows) {
         if (err) {
             console.log("Request failed: " + err);
         } else {
             console.log(rowCount + ' rows');
-            callback();
+            return rows;
         }
 
     });
-
+    var rowcounter = 0;
     request.on('row', function (columns) {
+        rowcounter++;
+        console.log('Row' + rowcounter);
         columns.forEach(function (column) {
-            console.log('Row ' + column.value);
+            console.log('Col ' + column.metadata.colName + ' : ' + column.value);
         });
     });
 
     connection.execSql(request);
-    request.on('done', function () {
+    request.on('done', function (rowCount, more, rows) {
         console.log('Database done');
+        console.log('Total rows' + rowCount);
         callback();
     });
 

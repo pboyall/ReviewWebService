@@ -32,7 +32,7 @@ db.ConnectAndQuery(sql, myfunc);
 
 var taskrepo = new taskRepository({
     WorkflowProcessId: 3,
-    dbContext: database
+    dbContext: db
 });
 
 var _TaskId = 1;
@@ -50,6 +50,8 @@ var theTaskAssignment = new taskAssignment({
 });
 
 console.log(theTaskAssignment.DateAssigned);
+
+taskrepo.load(theTaskAssignment, myfunc);
 
 
 //taskrepo.save(theTaskAssignment, myfunc);
