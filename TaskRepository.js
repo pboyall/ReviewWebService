@@ -18,7 +18,7 @@ var taskRepository =
             console.log(Object.getPrototypeOf(theObject));
             //switch statement here when have more than one class
             var sql = "select * from task";
-            this.dbContext.query(sql, callme);
+            this.dbContext.ConnectAndQuery(sql, callme);
         }
     };
 

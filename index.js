@@ -1,7 +1,11 @@
 'use strict';
 
-console.log("Being Web Service");
-
+console.log("Begin Web Service");
+//Sanity Kill
+process.on('uncaughtException', function (err) {
+    console.log('Uncaught Exception ' + err + ' , quitting');
+    process.exit(1);
+});
 
 var database = require('./sqlite.js');
 
@@ -17,7 +21,10 @@ var callme = function () {
 };
 
 
-var sql = "select * from task";
+var sql = "select * from Task";
+
+//database.
+ConnectAndQuery(sql, callmeandquit);
 
 
 //database.query(sql, callme);
@@ -57,3 +64,54 @@ wibble.save(theTaskAssignment, callme);
 //As this is node, it keeps running unless we exit
 
 process.exit();
+
+
+var express = require('express');
+var app = express();
+
+console.log("Registering endpoint: /");
+app.get('/', function (req, res) {
+    res.send('hello ROOT world');
+});
+
+console.log("Registering endpoint: /stubbed");
+app.get('/stubbed', function (req, res) {
+    res.send('hello STUBBED');
+});
+
+console.log("Registering endpoint: /testing");
+app.get('/testing', function (req, res) {
+    res.send('this is a test endpoint');
+});
+
+console.log("Registering endpoint: /jsonendpoint");
+app.get('/jsonendpoint', function (req, res) {
+    res.json({
+        "mykey": "myvalue",
+        "testy": "something",
+        "exnum": 123
+    });
+});
+
+app.get('/data', function (req, res) {
+    db.get("SELECT value FROM counts", function (err, row) {
+        res.json({
+            "count": row.value
+        });
+    });
+});
+
+app.post('/data', function (req, res) {
+    db.run("UPDATE counts SET value = value + 1 WHERE key = ?", "counter", function (err, row) {
+        if (err) {
+            console.err(err);
+            res.status(500);
+        } else {
+            res.status(202);
+        }
+        res.end();
+    });
+});
+
+
+app.listen(3000);
