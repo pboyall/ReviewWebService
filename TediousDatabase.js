@@ -1,5 +1,6 @@
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
+var bDebug = true;
 
 var config = {
     userName: 'radmin',
@@ -9,7 +10,9 @@ var config = {
     options: {
         encrypt: false,
         database: 'ReviewProject',
-        rowCollectionOnDone: true
+        rowCollectionOnDone: true,
+        rowCollectionOnRequestCompletion: true,
+        useColumnNames: false
     }
 };
 
@@ -25,8 +28,6 @@ database.prototype.getConnection = function getConnection() {
     return connection;
 };
 
-
-
 database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
     console.log('Connect and Query SQL: ' + sql);
     var thesql = sql;
@@ -34,8 +35,7 @@ database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
     connection.on('connect', function (err) {
         // If no error, then good to go...
         console.log("Conected - execute" + sql);
-        rows = executeStatement(sql, callback);
-        return rows;
+        executeStatement(sql, callback);
     });
 
     connection.on('error', function (err) {
@@ -45,38 +45,70 @@ database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
     connection.on('debug', function (text) {
         console.log("Debug Connecting: " + text);
     });
-
-    callback();
 };
 
 //Internal Function
 
 function executeStatement(sql, callback) {
     console.log('execute statement');
+    var retval = '';
     request = new Request(sql, function (err, rowCount, rows) {
         if (err) {
             console.log("Request failed: " + err);
         } else {
+            var rowarray = [];
             console.log(rowCount + ' rows');
-            return rows;
+            //callback(rows);
+            //return rows;
         }
+        connection.close();
 
     });
     var rowcounter = 0;
     request.on('row', function (columns) {
         rowcounter++;
         console.log('Row' + rowcounter);
+        retval = retval + "{ "
+            //if (bDebug) {
         columns.forEach(function (column) {
-            console.log('Col ' + column.metadata.colName + ' : ' + column.value);
+            //console.log('Col ' + column.metadata.colName + ' : ' + column.value);
+            retval = retval + column.metadata.colName + ' : ' + column.value + ",";
         });
+        retval = retval + " },"
+            //}
     });
+    /*
+        request.on('done', function (rowCount, more, rows) {
+            console.log('Database done');
+            console.log('Total rows' + rowCount);
+            console.log(Object.getPrototypeOf(rows));
+            //callback(rows);
+
+        });
+    */
+    request.on('doneInProc', function (rowCount, more, rows) {
+        console.log('In Proc Database done');
+        //console.log('InProc Total rows' + rowCount);
+        //console.log(Object.getPrototypeOf(rows));
+        //console.log(rows);
+        console.log(retval);
+        //callback(rows, rowCount);
+        callback(retval, rowCount);
+
+    });
+    /*
+        request.on('doneProc', function (rowCount, more, rows) {
+            console.log('Proc Database done');
+            console.log('Proc Total rows' + rowCount);
+            console.log(Object.getPrototypeOf(rows));
+            callback(rows);
+
+        });
+    */
+
 
     connection.execSql(request);
-    request.on('done', function (rowCount, more, rows) {
-        console.log('Database done');
-        console.log('Total rows' + rowCount);
-        callback();
-    });
+
 
 
 }
