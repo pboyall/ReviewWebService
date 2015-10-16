@@ -13,17 +13,20 @@ var config = {
 };
 
 console.log('Get Connection');
-
 var connection;
+
+var database = function () {};
 
 //No checks on SQL - just a Proof of Concept this
 
-function getConnection() {
+database.prototype.getConnection = function getConnection() {
     connection = new Connection(config);
     return connection;
 }
 
-module.exports.ConnectAndQuery = function (sql, callback) {
+
+
+database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
     console.log('Connect and Query SQL: ' + sql);
     connection = getConnection();
     connection.on('connect', function (err, sql, callback) {
@@ -42,6 +45,8 @@ module.exports.ConnectAndQuery = function (sql, callback) {
 
     callback();
 };
+
+//Internal Function
 
 function executeStatement(sql, callback) {
     console.log('execute statement');
@@ -69,3 +74,5 @@ function executeStatement(sql, callback) {
 
 
 }
+
+module.exports = database;

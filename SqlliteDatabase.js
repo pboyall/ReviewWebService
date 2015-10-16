@@ -8,18 +8,23 @@
 
     var database = function () {};
 
+    //Replace with connection pooling later
+
+    database.prototype.getConnection = function () {
+        var db = new sqlite3.Database(file);
+        return db;
+    }
 
     database.prototype.ConnectAndQuery = function (sql, callback) {
         var db = new sqlite3.Database(file);
         console.log("Query SQL : " + sql);
         console.log(file);
         db.serialize(function () {
-            db.each("SELECT * FROM Task", function (err, row) {
-                console.log("Execute");
-                console.log("Interior sql : " + sql);
+            db.each(sql, function (err, row) {
                 console.log(row.TaskId + ": " + row.Status + " : " + row.RaiserUserId);
             });
         });
+        db.close();
     }
 
     module.exports = database;
@@ -46,7 +51,20 @@
     }
 
 
+    //module.exports.ConnectAndQuery = func2;
 
+    //    var stmt = db.prepare("INSERT INTO Stuff VALUES (?)");
+    //        stmt.run("Thing #" + rnd);
+    //    stmt.finalize();
+    //        db.each("SELECT * FROM Task", function (err, row) {
+    //            console.log(row.TaskId + ": " + row.Status + " : " + row.RaiserUserId);
+
+    var complete = function (err, numrows) {
+        stmt.finalize();
+        db.close();
+        console.log("Complete");
+
+    };
 
     //Works globally
     /*
