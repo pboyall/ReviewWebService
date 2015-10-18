@@ -63,6 +63,10 @@ var taskAssignment = class TaskAssignment {
     toString() {
         return '${this.TaskId} ${this.DataAssigned}';
     }
+
+    type() {
+        return Object.getPrototypeOf(this);
+    }
 };
 
 module.exports = taskAssignment;

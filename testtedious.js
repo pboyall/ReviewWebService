@@ -26,11 +26,19 @@ var myf = function myfunc(rows, rowCount) {
     console.log("End");
     console.log(Object.getPrototypeOf(rows));
     console.log(rows);
+    console.log("###############################################################");
     runRestOfServer();
 }
+console.log("****************************************************************");
 db.ConnectAndQuery(sql, myf);
 
 //3 refers to WorkFlowProcessId = it's magic
+
+var captureresults = function resultcap(rows, rowCount) {
+    console.log("Result Capture:" + rowCount);
+    console.log(Object.getPrototypeOf(rows));
+    console.log(rows);
+}
 
 var runRestOfServer = function () {
 
@@ -55,8 +63,7 @@ var runRestOfServer = function () {
 
     console.log("Date Task Assigned : " + theTaskAssignment.DateAssigned);
 
-    taskrepo.load(theTaskAssignment, function () {});
-
+    taskrepo.load(theTaskAssignment, captureresults);
 
     //taskrepo.save(theTaskAssignment, myfunc);
 }
