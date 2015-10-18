@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
@@ -9,6 +10,7 @@ var sass = require('gulp-sass');
 var nodemon = require('gulp-nodemon');
 var jshint = require('jshint');
 var exec = require('child_process').exec;
+
 
 
 gulp.task('scripts', function () {
@@ -24,9 +26,11 @@ gulp.task('scripts', function () {
 
 // The default task (called when you run `gulp`)
 gulp.task('default', function () {
+    gutil.log('Gulp started');
     gulp.run('scripts');
     // Watch files and run tasks if they change
-    gulp.watch(['/src/*.js', 'src/lib/*.js'], function (event) {
+    gulp.watch(['src/*.js', 'src/lib/*.js'], function (event) {
+        gutil.log('Watched file changed');
         gulp.run('scripts');
         gulp.run('server');
     });
@@ -34,6 +38,7 @@ gulp.task('default', function () {
 
 
 gulp.task('typescript', function () {
+    gutil.log('Compile Typescript');
     var tsResult = gulp.src('*.ts')
         .pipe(ts({
             declarationFiles: true,
@@ -49,13 +54,15 @@ gulp.task('typescript', function () {
 });
 
 gulp.task('sass', function () {
+    gutil.log('Compile SASS');
     gulp.src('*.scss')
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(gulp.dest('./css'));
 });
 
 gulp.task('javascript', function () {
-    gulp.src(['*.js', '/src/*.js', 'src/lib/*.js', '!vendor/**', '!gulpfile.js'])
+    gutil.log('Compile Javascript');
+    gulp.src(['*.js', 'src/*.js', 'src/lib/*.js', '!vendor/**', '!gulpfile.js'])
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat("all.js"))
@@ -63,42 +70,47 @@ gulp.task('javascript', function () {
         .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('watch', function () {
-    gulp.watch('*.scss', ['sass']);
-    gulp.watch('*.ts', ['typescript']);
-    gulp.watch('*.js', ['javascript']);
-    gulp.watch('/src/*.scss', ['sass']);
-    gulp.watch('/src/*.ts', ['typescript']);
-    gulp.watch('/src/*.js', ['javascript']);
-    gulp.watch('/src/lib/*.js', ['javascript']);
-    gulp.watch('*', ['server']);
-});
-
-gulp.task('lint', function () {
-    gulp.src('./**/*.js')
-        .pipe(jshint());
-});
-
-gulp.task('start', function () {
-    nodemon({
-        script: 'index.js',
-        ext: 'js html',
-        ignore: ['gulpfile.js'],
-        env: {
-            'NODE_ENV': 'development'
-        },
-        tasks: ['lint']
-    });
-});
 
 gulp.task('server', function (cb) {
-
     //Do the build here if desired
-
-    //Change this to look at the build directory
-    exec('node build/js/all.js', function (err, stdout, stderr) {
+    gutil.log('Execute Server Task');
+    //Just while learning how to debug compiled files
+    exec('node src/testtedious.js', function (err, stdout, stderr) {
+        //    exec('node build/js/all.js', function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
         cb(err);
     });
 });
+
+gulp.task('watch', function () {
+    gulp.watch('*.scss', ['sass']);
+    gulp.watch('*.ts', ['typescript']);
+    gulp.watch('*.js', ['javascript']);
+    gulp.watch('src/*.scss', ['sass']);
+    gulp.watch('src/*.ts', ['typescript']);
+    gulp.watch('src/*.js', ['javascript']);
+    gulp.watch('src/lib/*.js', ['javascript']);
+    gulp.watch('*', ['server']);
+});
+
+
+
+
+//gulp.task('lint', function () {
+//    gulp.src('./**/*.js')
+//        .pipe(jshint());
+//});
+//
+//
+//gulp.task('start', function () {
+//    nodemon({
+//        script: 'TediousDatabase.js',
+//        ext: 'js html',
+//        ignore: ['gulpfile.js'],
+//        env: {
+//            'NODE_ENV': 'development'
+//        },
+//        tasks: ['lint']
+//    });
+//});

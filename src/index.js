@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 console.log("Begin Web Service");
 //Sanity Kill
@@ -7,7 +7,7 @@ process.on('uncaughtException', function (err) {
     process.exit(1);
 });
 
-var database = require('./sqlite.js');
+var database = require('sqlite.js');
 
 //POC DB Query Code
 
@@ -114,4 +114,4 @@ app.post('/data', function (req, res) {
 });
 
 
-app.listen(3000);
+app.listen(3000);*/
