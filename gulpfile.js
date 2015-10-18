@@ -13,7 +13,7 @@ var exec = require('child_process').exec;
 
 gulp.task('scripts', function () {
     // Minify and copy all JavaScript (except vendor scripts)
-    gulp.src(['*.js', '!vendor/**', '!gulpfile.js'])
+    gulp.src(['/src/*.js', '/src/lib/*.js', '!vendor/**', '!gulpfile.js'])
         //.pipe(uglify())
         .pipe(sourcemaps.init())
         .pipe(babel())
@@ -25,9 +25,8 @@ gulp.task('scripts', function () {
 // The default task (called when you run `gulp`)
 gulp.task('default', function () {
     gulp.run('scripts');
-
     // Watch files and run tasks if they change
-    gulp.watch('*.js', function (event) {
+    gulp.watch(['/src/*.js', 'src/lib/*.js'], function (event) {
         gulp.run('scripts');
         gulp.run('server');
     });
@@ -44,8 +43,8 @@ gulp.task('typescript', function () {
         }));
 
     return merge([
-    tsResult.dts.pipe(gulp.dest('release/definitions')),
-    tsResult.js.pipe(gulp.dest('release/js'))
+    tsResult.dts.pipe(gulp.dest('build/definitions')),
+    tsResult.js.pipe(gulp.dest('build/js'))
     ]);
 });
 
@@ -56,7 +55,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('javascript', function () {
-    gulp.src(['*.js', '!vendor/**', '!gulpfile.js'])
+    gulp.src(['*.js', '/src/*.js', 'src/lib/*.js', '!vendor/**', '!gulpfile.js'])
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat("all.js"))
@@ -68,6 +67,10 @@ gulp.task('watch', function () {
     gulp.watch('*.scss', ['sass']);
     gulp.watch('*.ts', ['typescript']);
     gulp.watch('*.js', ['javascript']);
+    gulp.watch('/src/*.scss', ['sass']);
+    gulp.watch('/src/*.ts', ['typescript']);
+    gulp.watch('/src/*.js', ['javascript']);
+    gulp.watch('/src/lib/*.js', ['javascript']);
     gulp.watch('*', ['server']);
 });
 

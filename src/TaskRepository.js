@@ -17,30 +17,31 @@ var taskRepository =
             console.log(Object.getPrototypeOf(theObject));
             var theType = theObject.type();
             console.log(theType);
-            //switch statement here when have more than one class
-            theType = theType.substring(0, theType.indexOf("{"));
             //Should really bootstrap this from an array, hard coded just to get a prototype done
 
             console.log(theType.toString());
 
-            /*
-                            switch (theType) {
-                            case n:
-                                code block
-                                break;
-                            case n:
-                                code block
-                                break;
-                            default:
-                            default code block
-                            }
-            */
-            var sql = "select * from task where task";
+            var sql = "";
+
+            switch (theType) {
+            case "Task":
+                sql = "select * from task where TaskId = {0}";
+                break;
+            case "Task Assignment":
+                sql = "select * from task where taskid = {0}";
+                break;
+            default:
+                //
+            }
 
             var cb = function cbres(rows, rowCount) {
                 console.log("End Rows:" + rowCount);
                 console.log(rows);
             }
+
+            //Replace parameters with values  (should have used stored procs, would have been quicker than writing a string format function!
+
+
 
             this.dbContext.ConnectAndQuery(sql, cb);
         }
