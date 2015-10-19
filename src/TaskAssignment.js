@@ -64,8 +64,8 @@ var taskAssignment = class TaskAssignment {
         return '${this.TaskId} ${this.DataAssigned}';
     }
 
-    type() {
-        return Object.getPrototypeOf(this);
+    theType() {
+        return "TaskAssignment"; //Object.getPrototypeOf(this);
     }
 };
 
