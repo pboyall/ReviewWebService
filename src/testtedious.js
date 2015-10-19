@@ -20,11 +20,11 @@ process.on('uncaughtException', function (err) {
 
 
 var db = new database();
+
+//Test code to check the database is working
 var sql = "select * from Task";
 var myf = function myfunc(rows, rowCount) {
     console.log("End Rows:" + rowCount);
-    console.log("End");
-    console.log(Object.getPrototypeOf(rows));
     console.log(rows);
     console.log("###############################################################");
     runRestOfServer();
@@ -36,8 +36,9 @@ db.ConnectAndQuery(sql, myf);
 
 var captureresults = function resultcap(rows, rowCount) {
     console.log("Result Capture:" + rowCount);
-    console.log(Object.getPrototypeOf(rows));
     console.log(rows);
+    console.log("=====================================");
+
 }
 
 var runRestOfServer = function () {
@@ -65,7 +66,7 @@ var runRestOfServer = function () {
 
     taskrepo.load(theTaskAssignment, captureresults);
 
-    //taskrepo.save(theTaskAssignment, myfunc);
+    taskrepo.save(theTaskAssignment, myf);
 }
 
 

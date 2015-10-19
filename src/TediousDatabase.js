@@ -95,7 +95,7 @@ function executeStatement(sql, callback) {
         });
     */
     request.on('doneInProc', function (rowCount, more, rows) {
-        console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+        console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++');
         console.log('In Proc Database done');
         //console.log('InProc Total rows' + rowCount);
         //console.log(Object.getPrototypeOf(rows));
@@ -103,7 +103,7 @@ function executeStatement(sql, callback) {
         console.log(retval);
         //callback(rows, rowCount);
         callback(retval, rowCount);
-        console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+        console.log('-------------------------------------------------------');
     });
     /*
         request.on('doneProc', function (rowCount, more, rows) {

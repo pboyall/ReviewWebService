@@ -23,7 +23,7 @@ var taskAssignment = class TaskAssignment {
 
     }
 
-    /* If you define getters only, Node then decides you want read only properties.  If you define nothing, you get read/write properties ipso facto
+    /* If you define getters only, Node (javascript) then decides you want read only properties.  If you define nothing, you get read/write properties ipso facto do nothing.  Bonkers!
         get TaskId() {
             return this.make;
         }
