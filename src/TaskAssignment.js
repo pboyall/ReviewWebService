@@ -3,16 +3,16 @@
 var taskAssignment = class TaskAssignment {
 
     constructor(properties) {
+        this.Fields = properties;
         this.TaskId = properties.TaskId;
         this.DateAssigned = properties.DateAssigned;
         this.GroupId = properties.GroupId;
         this.AccessType = properties.AccessType;
         this.NodeId = properties.NodeId;
 
-        var TableName = 'TaskAssignment';
-        //var Keys = {'TaskId', 'GroupId'};
+        this.TableName = 'TaskAssignment';
+        this.Keys = ['TaskId', 'GroupId'];
 
-        //Is there a way to iterate the properties in a javascript object?  Never tried it.
         //Maybe instead of unique properties we could have a dictionary object of name value pairs?
         //Then we could have a generic class for all the tables
         //Might be gettting carried away here

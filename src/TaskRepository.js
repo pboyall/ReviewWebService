@@ -14,20 +14,17 @@ var taskRepository =
             console.log("javascript sucks big time");
         }
 
-        //Quick function to replace parameters with the values        
-
-        replaceParameters(sql, arr) {
-            var newString = new sprint();
-            sql = newString.format(sql, arr);
-            console.log(sql);
-            return sql;
-        }
-
         //Get inserts/select/update SQL (mapping)
         // Consider how to do this with a field list/value list name-value pairing rather than hard-coding
         //Then only need one SQL statement and just replace table name, fields and values each time
+        //These are just hard coded for now for speed - have started writing a full ORM but probably a bit pointless
+
 
         obtainSQL(theObject) {
+
+            //[] delineates values
+            //{} delineates field names
+
             var theType = theObject.theType();
             var selectsql, updatesql, insertsql;
 
@@ -40,7 +37,7 @@ var taskRepository =
             case "TaskAssignment":
                 selectsql = "select * from TaskAssignment where taskid = {0}";
                 updatesql = "Update TaskAssignment set where TaskId = {0}";
-                insertsql = "insert into TaskAssignment (TaskId, DateAssigned, GroupId, AccessType, NodeId) VALUES({0}, getdate(), {1}, {2}, {3})";
+                insertsql = "insert into TaskAssignment ({0},{1},{2},{3},{4}) VALUES([0],[1], [2], [3], [4])";
                 break;
             default:
                 console.log("no match found");
@@ -54,6 +51,8 @@ var taskRepository =
         }
 
         //Get the key array for a given object
+        //Written this so later can abstract it out into a full ORM layer
+        //Might be better to return an object so it's got the key names too?
 
         obtainKeys(theObject) {
             var theType = theObject.theType();
@@ -71,6 +70,116 @@ var taskRepository =
             }
             return keys;
         }
+
+        //Get the field array for a given object
+        //Written this so later can abstract it out into a full ORM layer
+        obtainFields(theObject) {
+            var theType = theObject.theType();
+            var fields = [];
+            var keys = [];
+
+            switch (theType) {
+            case "Task":
+                keys[0] = theObject.TaskId;
+                break;
+            case "TaskAssignment":
+                keys[0] = theObject.TaskId;
+                break;
+            default:
+                console.log("no match found");
+            }
+            return keys;
+        }
+
+        obtainValues(theObject) {
+            var theType = theObject.theType();
+            var values = [];
+            var keys = [];
+
+            switch (theType) {
+            case "Task":
+                values[0] = theObject.TaskId;
+                break;
+            case "TaskAssignment":
+                values[0] = theObject.TaskId;
+                break;
+            default:
+                console.log("no match found");
+            }
+            return keys;
+        }
+
+
+        populateSQL(theObject, sql) {
+            var theType = theObject.theType();
+            var fieldnames = [];
+            var fieldvalues = [];
+            var keys = [];
+            var keyvalues = [];
+
+            var selectSQL = "select ";
+            var insertSQL = "insert into " + theObject.TableName + "";
+            var deleteSQL = "delete ";
+            var updateSQL = "update ";
+
+            //Iterate over object and replace each SQL placeholder with the value
+            //Suspect plain string formatting is a bit fragile here
+            //Need matched pairs I guess in the SQL string
+            //Would be just as dangerous to do it using a stored proc
+            //unless had named parameters
+            for (var property in theObject) {
+                if (theObject.hasOwnProperty(property)) {
+                    //Write out property name and value into SQL
+                    if (selectSQL == "select ") {} else {
+                        selectSQL = selectSQL + ",";
+                    }
+                    selectSQL = selectSQL + property;
+                }
+            }
+            selectSQL = selectSQL + " from " + theObject.TableName;
+            selectSQL = selectSQL + " where ";
+
+            theObject.Keys.map(function (item) {
+                console.log(item);
+                console.log(theObject[item]);
+
+            });
+
+            this.replacefieldnames(sql, fieldnames);
+            this.replaceFields(sql, fieldvalues);
+
+        }
+
+        //Quick function to replace parameters with the values        
+
+        replaceParameters(sql, arr) {
+            var newString = new sprint();
+            sql = newString.format(sql, arr);
+            console.log(sql);
+            return sql;
+        }
+
+        replaceKeys(sql, arr) {
+            var newString = new sprint();
+            sql = newString.formatfieldname(sql, arr);
+            console.log(sql);
+            return sql;
+        }
+
+        replacefieldnames(sql, arr) {
+            var newString = new sprint();
+            sql = newString.formatfieldname(sql, arr);
+            console.log(sql);
+            return sql;
+        }
+
+        replaceFields(sql, arr) {
+            var newString = new sprint();
+            sql = newString.formatfieldvalue(sql, arr);
+            console.log(sql);
+            return sql;
+        }
+
 
         load(theObject, callme) {
             //Hard coded SQL as proof of concept
@@ -117,13 +226,16 @@ var taskRepository =
             sql = sqlobj.insert;
             console.log(sql);
             keys = this.obtainKeys(theObject);
-            console.log(keys);
             console.log(sql);
+            console.log(keys);
+
             //replace sql paramters with values
 
             sql = this.replaceParameters(sql, keys);
 
             //this.dbContext.ConnectAndQuery(sql, callme);
+
+            console.log(sql);
 
             console.log('=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+');
 
