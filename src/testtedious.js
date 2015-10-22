@@ -174,6 +174,9 @@ var runRestOfServer = function () {
         StartDate: _StartDate,
         EndDate: _EndDate
     });
+
+    taskrepo.load(UG, captureresults);
+
     //  taskrepo.save(theTaskAssignment, myf);
 };
 
