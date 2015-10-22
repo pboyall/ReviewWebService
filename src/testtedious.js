@@ -1,11 +1,17 @@
 'use strict';
+//Database Handler (can plug in SqlliteDatabase.js instead)
 var database = require('./TediousDatabase.js');
+//Does REST Web Services
 var express = require('express');
 var http = require('http');
-var app = express();
+var path = require('path');
+var logger = require('morgan');
+
 //Initial Attempt at making a repository work
 var taskRepository = require('./TaskRepository.js');
-//Can do this with an index.js but for now code explicitly
+
+//The classes that map to the database tables (one on one mapping)
+//Can do this with an index.js and just require the folder (so easy to add new classes) but for now code explicitly so it's more obvious
 var taskAssignment = require('./Model/TaskAssignment.js');
 var task = require('./Model/Task.js');
 var ApprovalProcessTypes = require('./Model/ApprovalProcessTypes.js');
@@ -16,32 +22,21 @@ var TaskNode = require('./Model/TaskNode.js');
 var TaskAssignmentHistory = require('./Model/TaskAssignmentHistory.js');
 var UserGroup = require('./Model/UserGroup.js');
 
+//Initialise Web Service Config
+var app = express();
+app.use(logger('dev'));
 var port = process.env.PORT || 3000;
 var host = process.env.HOST || "127.0.0.1";
-
-
 console.log("Begin Web Service");
-//Sanity Kill
+//Sanity Kill Method for entire Node Module
 process.on('uncaughtException', function (err) {
     console.log('Uncaught Exception ' + err + ' , quitting');
     process.exit(1);
 });
 
-
+//Create the database object to inject into everything
 var db = new database();
 
-//Test code to check the database is working
-var sql = "select * from Task";
-var myf = function myfunc(rows, rowCount) {
-    console.log("End Rows:" + rowCount);
-    console.log(rows);
-    console.log("###############################################################");
-    runRestOfServer();
-};
-console.log("****************************************************************");
-//db.ConnectAndQuery(sql, myf);
-
-//3 refers to WorkFlowProcessId = it's magic
 
 var captureresults = function resultcap(rows, rowCount) {
     console.log("Result Capture:" + rowCount);
@@ -50,6 +45,8 @@ var captureresults = function resultcap(rows, rowCount) {
 
 };
 
+
+//3 refers to WorkFlowProcessId = it's magic
 
 
 var runRestOfServer = function () {
@@ -93,8 +90,6 @@ var runRestOfServer = function () {
     var _TaskAssignmentHistoryId = 1;
     var _ApproverId = 1;
     var _PersonId = 1;
-
-
 
     var theTaskAssignment = new taskAssignment({
         TaskId: _TaskId,

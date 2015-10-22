@@ -1,4 +1,5 @@
-//Need to implement connection pooling
+//Might want to make this implement the singleton pattern, although not totally sure it will hurt to have multiple instances floating around
+
 var ConnectionPool = require('tedious-connection-pool');
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
