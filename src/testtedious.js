@@ -6,6 +6,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var logger = require('morgan');
+var Q = require('Q');
 
 //Initial Attempt at making a repository work
 var taskRepository = require('./TaskRepository.js');
@@ -37,19 +38,102 @@ process.on('uncaughtException', function (err) {
 //Create the database object to inject into everything
 var db = new database();
 
+//Run Checks to ensure database is up
+var myf = function myfunc(rows, rowCount) {
+    console.log("Database connection varified");
+    console.log("****************************************************************");
+    setUpWebService().then(runRestOfServer());
+};
+console.log("****************************************************************");
+console.log("System Verification Tasks");
 
-var captureresults = function resultcap(rows, rowCount) {
-    console.log("Result Capture:" + rowCount);
-    console.log(rows);
-    console.log("=====================================");
+db.ConnectAndQuery("select * from Task", myf);
+
+var setUpWebService = function () {
+
+    var deferred = Q.defer();
+
+    //Web Service Code
+
+    console.log("Set Up Web Service");
+    console.log("================================================");
+
+    console.log("Registering endpoint: /");
+    app.get('/', function (req, res) {
+        res.send('PW Review Process Web Service');
+    });
+
+    console.log("Registering endpoint: /Initialise");
+    app.get('/Initialise', function (req, res) {
+        res.send('Begin Review Process');
+    });
+
+    console.log("Registering endpoint: /End");
+    app.get('/End', function (req, res) {
+        res.send('End Review Process');
+    });
+
+    console.log("Registering endpoint: /Approve");
+    app.get('/Approve', function (req, res) {
+        res.send('Approved');
+    });
+
+    console.log("Registering endpoint: /Reject");
+    app.get('/Reject', function (req, res) {
+        res.send('Rejected');
+    });
+
+    console.log("Registering endpoint: /getTask");
+    app.get('/getTask', function (req, res) {
+        var sql = "SELECT value, detail FROM counts";
+        db.ConnectAndQuery(sql, function (err, row) {
+            res.json({
+                "value": row.value,
+                "detail": row.detail
+            });
+        });
+    });
+
+    app.post('/setTask', function (req, res) {
+        db.run("UPDATE counts SET value = value + 1 WHERE key = ?", "counter", function (err, row) {
+            if (err) {
+                console.err(err);
+                res.status(500);
+            } else {
+                res.status(202);
+            }
+            res.end();
+        });
+    });
+
+    var server = http.createServer(app).listen(port, host, function () {
+        console.log("Server listening to %s:%d within %s environment",
+            host, port, app.get('env'));
+        deferred.resolve();
+    });
+
+    //app.listen(port);
+
+    console.log("================================================");
+
+    //Handle errors
+    //if (error) {
+    //        deferred.reject(new Error(error));
+    //    } else {
+    //        deferred.resolve(text);
+    //    }
+
+    return deferred.promise;
 
 };
+
 
 
 //3 refers to WorkFlowProcessId = it's magic
 
 
 var runRestOfServer = function () {
+    var deferred = Q.defer();
 
     var taskrepo = new taskRepository({
         WorkflowProcessId: 3,
@@ -98,10 +182,6 @@ var runRestOfServer = function () {
         AccessType: _AccessType,
         NodeId: _NodeId
     });
-
-    console.log("Date Task Assigned : " + theTaskAssignment.DateAssigned);
-
-    taskrepo.load(theTaskAssignment, captureresults);
 
     var theTask = new task({
         TaskId: _TaskId,
@@ -170,70 +250,21 @@ var runRestOfServer = function () {
         EndDate: _EndDate
     });
 
-    taskrepo.load(UG, captureresults);
+    var captureresults = function resultcap(rows, rowCount) {
+        console.log("Result Capture:" + rowCount);
+        console.log(rows);
+        console.log("=====================================");
+        deferred.resolve();
+    };
+
+    console.log("Load Task Assignment");
+    taskrepo.load(theTaskAssignment, captureresults).then(function () {
+        console.log("Load User Group");
+        taskrepo.load(UG, captureresults);
+    });
 
     //  taskrepo.save(theTaskAssignment, myf);
+
+    return deferred.promise;
+
 };
-
-
-
-
-//Web Service Code
-
-console.log("Registering endpoint: /");
-app.get('/', function (req, res) {
-    res.send('PW Review Process Web Service');
-});
-
-console.log("Registering endpoint: /Initialise");
-app.get('/Initialise', function (req, res) {
-    res.send('Begin Review Process');
-});
-
-console.log("Registering endpoint: /End");
-app.get('/End', function (req, res) {
-    res.send('End Review Process');
-});
-
-console.log("Registering endpoint: /Approve");
-app.get('/Approve', function (req, res) {
-    res.send('Approved');
-});
-
-console.log("Registering endpoint: /Reject");
-app.get('/Reject', function (req, res) {
-    res.send('Rejected');
-});
-
-console.log("Registering endpoint: /getTask");
-app.get('/getTask', function (req, res) {
-    var sql = "SELECT value, detail FROM counts";
-    db.ConnectAndQuery(sql, function (err, row) {
-        res.json({
-            "value": row.value,
-            "detail": row.detail
-        });
-    });
-});
-
-app.post('/setTask', function (req, res) {
-    db.run("UPDATE counts SET value = value + 1 WHERE key = ?", "counter", function (err, row) {
-        if (err) {
-            console.err(err);
-            res.status(500);
-        } else {
-            res.status(202);
-        }
-        res.end();
-    });
-});
-
-var server = http.createServer(app).listen(port, host, function () {
-    console.log("Server listening to %s:%d within %s environment",
-        host, port, app.get('env'));
-});
-
-app.listen(port);
-
-
-runRestOfServer();
