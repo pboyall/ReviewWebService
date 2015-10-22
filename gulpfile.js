@@ -15,11 +15,11 @@ var exec = require('child_process').exec;
 
 gulp.task('scripts', function () {
     // Minify and copy all JavaScript (except vendor scripts)
-    gulp.src(['/src/*.js', '/src/lib/*.js', '!vendor/**', '!gulpfile.js'])
+    gulp.src(['/src/*.js', '/src/library/*.js', 'src/Model/*.js', '!vendor/**', '!gulpfile.js', '!node_modules'])
         //.pipe(uglify())
         .pipe(sourcemaps.init())
         .pipe(babel())
-        .pipe(concat("all.js"))
+        //.pipe(concat("all.js"))
         .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('build/js'));
 });
@@ -27,13 +27,21 @@ gulp.task('scripts', function () {
 // The default task (called when you run `gulp`)
 gulp.task('default', function () {
     gutil.log('Gulp started');
-    gulp.run('scripts');
+    //    gulp.run('scripts');
+
+    gulp.watch('*.js', ['javascript']);
+    gulp.watch('src/*.scss', ['sass']);
+    gulp.watch('src/*.ts', ['typescript']);
+    gulp.watch('src/*.js', ['javascript']);
+    gulp.watch('src/library/*.js', ['javascript']);
+    gulp.watch('src/Model/*.js', ['javascript']);
+
     // Watch files and run tasks if they change
-    gulp.watch(['src/*.js', 'src/lib/*.js'], function (event) {
-        gutil.log('Watched file changed');
-        gulp.run('scripts');
-        gulp.run('server');
-    });
+    //gulp.watch(['src/*.js', 'src/library/*.js', 'src/Model/*.js', ], function (event) {
+    //        gutil.log('Watched file changed');
+    //        gulp.run('scripts');
+    //        gulp.run('server');
+    //});
 });
 
 
@@ -62,12 +70,37 @@ gulp.task('sass', function () {
 
 gulp.task('javascript', function () {
     gutil.log('Compile Javascript');
-    gulp.src(['*.js', 'src/*.js', 'src/lib/*.js', '!vendor/**', '!gulpfile.js'])
+    //Keeping separate as wildcards seems to make a mess of the folders
+
+    gulp.src(['src/Model/*.js', '!vendor/**', '!gulpfile.js', '!build/**', '!node_modules'])
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        //.pipe(concat("all.js"))
+        .pipe(sourcemaps.write("."))
+        .pipe(gulp.dest('./build/js/Model'));
+
+    gulp.src(['src/library/*.js', '!vendor/**', '!gulpfile.js', '!build/**', '!node_modules'])
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        //.pipe(concat("all.js"))
+        .pipe(sourcemaps.write("."))
+        .pipe(gulp.dest('./build/js/library'));
+
+    gulp.src(['src/*.js', '!vendor/**', '!gulpfile.js', '!build/**', '!node_modules'])
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        //.pipe(concat("all.js"))
+        .pipe(sourcemaps.write("."))
+        .pipe(gulp.dest('./build/js'));
+
+    gulp.src(['src/Model/*.js', 'src/library/*.js', 'src/*.js', '!vendor/**', '!gulpfile.js', '!build/**', '!node_modules'], {
+            base: '.'
+        })
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat("all.js"))
         .pipe(sourcemaps.write("."))
-        .pipe(gulp.dest('build/js'));
+        .pipe(gulp.dest('./build/js'));
 });
 
 
@@ -90,7 +123,8 @@ gulp.task('watch', function () {
     gulp.watch('src/*.scss', ['sass']);
     gulp.watch('src/*.ts', ['typescript']);
     gulp.watch('src/*.js', ['javascript']);
-    gulp.watch('src/lib/*.js', ['javascript']);
+    gulp.watch('src/library/*.js', ['javascript']);
+    gulp.watch('src/Model/*.js', ['javascript']);
     gulp.watch('*', ['server']);
 });
 
