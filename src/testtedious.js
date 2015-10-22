@@ -250,7 +250,7 @@ var runRestOfServer = function () {
         EndDate: _EndDate
     });
 
-    var captureresults = function resultcap(rows, rowCount) {
+    var captureresults = function (rows, rowCount) {
         console.log("Result Capture:" + rowCount);
         console.log(rows);
         console.log("=====================================");

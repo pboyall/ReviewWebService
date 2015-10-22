@@ -109,7 +109,6 @@ function executePooledStatement(sql, callback) {
             console.log(retval);
             console.log('Close connection');
             connection.release();
-
             callback(retval, rowCount);
             console.log('-------------------------------------------------------');
         });

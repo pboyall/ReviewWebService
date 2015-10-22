@@ -1,5 +1,6 @@
 'use strict';
 var sprint = require('./library/stringfunctions.js');
+var Q = require('Q');
 
 var taskRepository =
 
@@ -65,6 +66,8 @@ var taskRepository =
         }
 
         load(theObject, callme) {
+            var deferred = Q.defer();
+
             //Hard coded SQL as proof of concept
             //_dbContext
             var theType = theObject.theType();
@@ -73,10 +76,17 @@ var taskRepository =
             var sqlobj = this.obtainSQL(theObject);
             var sql = sqlobj.select;
             console.log(sql);
-            this.dbContext.ConnectAndQuery(sql, callme);
+            //Resolve promise then call callback
+            var resolvePromise = function (rows, rowCount) {
+                deferred.resolve();
+                callme(rows, rowCount);
+            };
+
+            this.dbContext.ConnectAndQuery(sql, resolvePromise);
+
+            return deferred.promise;
+
         }
-
-
 
         save(theObject, callme) {
             //Hard coded SQL as proof of concept
@@ -87,7 +97,7 @@ var taskRepository =
             var sqlobj = this.obtainSQL(theObject);
             //TODO: Code "select" check then if no rows insert else update
             //For now just force insert each time
-            var sql = sqlobj.insert;
+            sql = sqlobj.insert;
             console.log(sql);
             this.dbContext.ConnectAndQuery(sql, callme);
             console.log('=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+');
