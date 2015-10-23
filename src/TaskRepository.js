@@ -54,7 +54,7 @@ var taskRepository =
 
             //Functionalise!
 
-            insertSQL = insertSQL + whereSQL;
+            insertSQL = insertSQL;
             updateSQL = updateSQL + whereSQL;
             selectSQL = selectSQL + whereSQL;
             return {
@@ -89,6 +89,7 @@ var taskRepository =
         }
 
         save(theObject, callme) {
+            var deferred = Q.defer();
             //Hard coded SQL as proof of concept
             console.log('+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=');
             console.log('save instance of ' + Object.getPrototypeOf(theObject));
@@ -97,11 +98,20 @@ var taskRepository =
             var sqlobj = this.obtainSQL(theObject);
             //TODO: Code "select" check then if no rows insert else update
             //For now just force insert each time
+            //Also should do insert using parameters rather than like this but leave it for now
             sql = sqlobj.insert;
             console.log(sql);
-            this.dbContext.ConnectAndQuery(sql, callme);
-            console.log('=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+');
 
+            var resolvePromise = function (rows, rowCount) {
+                deferred.resolve();
+                //Not sure this is right thing to return
+                callme(rows, rowCount);
+            };
+            var parameters = {}; //Empty for now
+            //Works but has lousy error handling this.dbContext.ConnectAndQuery(sql, resolvePromise);
+            this.dbContext.insert(sql, parameters, resolvePromise);
+            console.log('=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+');
+            return deferred.promise;
         }
     };
 

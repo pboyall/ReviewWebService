@@ -1,8 +1,10 @@
 //Might want to make this implement the singleton pattern, although not totally sure it will hurt to have multiple instances floating around
-
+var TYPES = require('tedious').TYPES;
 var ConnectionPool = require('tedious-connection-pool');
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
+var Qq = require('q');
+var updater = require('./updateData');
 var bDebug = true;
 var poolConfig = {
     min: 2,
@@ -38,7 +40,6 @@ database.prototype.getConnection = function getConnection() {
 
 database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
     console.log('Connect and Query SQL: ' + sql);
-    var thesql = sql;
     if (!pooling) {
         //Do a check here to see if connection already open
         connection = this.getConnection();
@@ -61,6 +62,11 @@ database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
 
 };
 
+database.prototype.insert = function Insert(sql, parameters, callback) {
+    console.log('Connect and Insert SQL: ' + sql);
+    executeInsert(sql, parameters, callback);
+};
+
 //Internal Functions
 
 //Pooled querying - theoretically 
@@ -75,6 +81,7 @@ function executePooledStatement(sql, callback) {
             console.error(err);
         } else {
             var request = new Request(sql, function (err, rowCount, rows) {
+                //Errors are not propogating from inserts
                 if (err) {
                     console.log("Request failed: " + err);
                 } else {
@@ -82,39 +89,41 @@ function executePooledStatement(sql, callback) {
                     connection.release();
                 }
             });
-        }
-        request.on('row', function (columns) {
-            rowcounter++;
-            console.log('Row' + rowcounter);
+            request.on('row', function (columns) {
+                rowcounter++;
+                console.log('Row' + rowcounter);
 
-            var colval = "";
-            //if (bDebug) {
-            columns.forEach(function (column) {
-                //console.log('Col ' + column.metadata.colName + ' : ' + column.value);
-                if (colval.length > 0) {
-                    colval = colval + ",";
+                var colval = "";
+                //if (bDebug) {
+                columns.forEach(function (column) {
+                    //console.log('Col ' + column.metadata.colName + ' : ' + column.value);
+                    if (colval.length > 0) {
+                        colval = colval + ",";
+                    }
+                    colval = colval + column.metadata.colName + ' : ' + column.value;
+                });
+                if (retval.length > 0) {
+                    retval = retval + ",";
                 }
-                colval = colval + column.metadata.colName + ' : ' + column.value;
+                retval = retval + "{" + colval + " }";
+                //}
             });
-            if (retval.length > 0) {
-                retval = retval + ",";
-            }
-            retval = retval + "{" + colval + " }";
-            //}
-        });
 
-        request.on('doneInProc', function (rowCount, more, rows) {
-            console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            console.log('In Proc Database done');
-            console.log(retval);
-            console.log('Close connection');
-            connection.release();
-            callback(retval, rowCount);
-            console.log('-------------------------------------------------------');
-        });
+            request.on('doneInProc', function (rowCount, more, rows) {
+                console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++');
+                console.log('In Proc Database done');
+                console.log(retval);
+                console.log(rowCount);
+                console.log(more);
 
-        connection.execSql(request);
+                console.log('Close connection');
+                connection.release();
+                callback(retval, rowCount);
+                console.log('-------------------------------------------------------');
+            });
 
+            connection.execSql(request);
+        }
     });
 
     pool.on('error', function (err) {
@@ -196,6 +205,118 @@ function executeStatement(sql, callback) {
         });
     */
     connection.execSql(request);
+}
+
+
+
+
+
+function executeInsert(sql, parameters, callback) {
+    console.log('execute insert');
+    var retval = '';
+    var rowcounter = 0;
+    var pool = new ConnectionPool(poolConfig, config);
+    var querySelect = "";
+
+    Qq.allSettled([updateData(querySelect, parameters, pool)])
+        .then(
+            function (promises) {
+                var promiseQueryData = promises[0];
+                try {
+                    //Measure results coming back from the updateData function.
+                    if (promiseQueryData.state == 'fulfilled') {
+                        var queryMessage = promiseQueryData.value;
+                        console.log(queryMessage);
+                        callback();
+                    }
+                } catch (ex) {
+                    console.log(ex);
+                    callback();
+                }
+            });
+
+    function updateData(queryInfo, insertParameters, pool) {
+
+
+        var connectStat;
+        var deferred = Qq.defer(); //Tell calling function that this has promise logic here as well.
+
+        pool.acquire(function (err, connection) {
+            if (err) {
+                console.error(err);
+                deferred.resolve("Connection Error" + err);
+            } else {
+                connection.on('end', function () {
+                    console.log("SQL-NODE END");
+                });
+
+                connection.on('error', function (err) {
+                    console.log("SQL-NODE ERROR - " + err);
+                });
+
+                connection.on('debug', function (msgText) {
+                    console.log("SQL-NODE DEBUG - " + msgText);
+                });
+
+                connection.on('infoMessage', function (info) {
+                    console.log('SQL-NODE info: ' + info.message);
+                });
+
+                connection.on('errorMessage', function (error) {
+                    console.log('SQL-NODE info: ' + error.message);
+                });
+
+                connection.on('connect', function (err) {
+                    if (err) {
+                        console.log("SQL-NODE: connection error: " + err);
+                        deferred.resolve("No Connection");
+                    } else {
+                        console.log("SQL-NODE: connected");
+                        connectStat = "connect";
+                        var request = new Request(queryInfo, function (err, rowCount, rows) {
+
+                            if (err) {
+                                console.log("Request error executeStatement -- " + err);
+                                deferred.resolve("Request Error" + err);
+                                connection.release();
+                            } else {
+
+                                //When rowcount is greater than 0 then rowCount represents the number of records updated.
+
+                                console.log('Request OK your done rowCount: ' + rowCount);
+
+                                connection.release();
+
+                                deferred.resolve("Query Complete" + rowCount);
+
+                            }
+
+                        });
+
+                        for (var property in insertParameters) {
+                            var obj = insertParameters[property];
+                            console.log(property + obj.value + obj.type.name);
+                            request.addParameter(property, TYPES[obj.type.name], obj.value);
+
+                        }
+
+                        connection.execSql(request);
+
+                    }
+
+                });
+            }
+            return deferred.promise; //Close off that this function has promise logic.
+
+        });
+    }
+
+
+
+    pool.on('error', function (err) {
+        console.error(err);
+    });
+
 }
 
 module.exports = database;

@@ -141,11 +141,11 @@ var runRestOfServer = function () {
     });
 
     var _TaskId = 1;
-    var _DateAssigned = '15/1/2015';
-    var _GroupId = '3';
+    var _DateAssigned = '2015-01-15';
+    var _GroupId = '1';
     var _AccessType = 1;
     var _NodeId = 1;
-    var _DateUpdated = '16/2/2015';
+    var _DateUpdated = '2015-01-16';
     var _Status = "A";
     var _RaiserUserId = 1;
     var _ApprovalType = 3;
@@ -166,8 +166,8 @@ var runRestOfServer = function () {
     var _RelativeGroupId = 1;
     var _Enabled = 1;
     var _RelationTypeId = 1;
-    var _StartDate = '20/3/2015';
-    var _EndDate = '30/4/2015';
+    var _StartDate = '2015-03-20';
+    var _EndDate = '2015-04-30';
     var _GroupRoleWeight = 1;
     var _Type = 1;
     var _Outcome = 1;
@@ -258,12 +258,17 @@ var runRestOfServer = function () {
     };
 
     console.log("Load Task Assignment");
-    taskrepo.load(theTaskAssignment, captureresults).then(function () {
-        console.log("Load User Group");
-        taskrepo.load(UG, captureresults);
-    });
+    taskrepo.load(theTaskAssignment, captureresults)
+        .then(function () {
+            console.log("Load User Group");
+            taskrepo.load(UG, captureresults);
+        })
+        .then(function () {
+            console.log("Save New Task Assignment");
+            taskrepo.save(theTaskAssignment, captureresults);
+        });
 
-    //  taskrepo.save(theTaskAssignment, myf);
+
 
     return deferred.promise;
 
