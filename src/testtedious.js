@@ -258,19 +258,19 @@ var runRestOfServer = function () {
     };
 
     console.log("Load Task Assignment");
-    //    taskrepo.load(theTaskAssignment, captureresults)
-    //        .then(function () {
-    //            console.log("Load User Group");
-    //            taskrepo.load(UG, captureresults)
-    //                .then(function () {
-    //                    console.log("Save New Task Assignment");
-    //                    taskrepo.save(theTaskAssignment, captureresults);
-    //                });
-    //        });
-
-    taskrepo.save(theTaskAssignment, captureresults);
-
-
+    taskrepo.load(theTaskAssignment, captureresults)
+        .then(
+            function () {
+                console.log("Load User Group");
+                taskrepo.load(UG, captureresults)
+            }
+        )
+        .then(
+            function () {
+                console.log("Save New Task Assignment");
+                taskrepo.save(theTaskAssignment, captureresults);
+            }
+        );
     return deferred.promise;
 
 };

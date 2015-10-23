@@ -21,8 +21,20 @@ function one() {
 function two() {
     var deferred = Q.defer();
     console.log("Starting two's ajax");
-    db.ConnectAndQuery("select * from Task", function () {
+    db.ConnectAndQuery("select * from UserGroup", function () {
         console.log('Finished with two. Ready to call next.');
+        deferred.resolve();
+    });
+    // The deferred object has a "promise" member,
+    // which has a "then" function
+    return deferred.promise;
+}
+
+function three() {
+    var deferred = Q.defer();
+    console.log("Starting three's ajax");
+    db.ConnectAndQuery("select * from TaskAssignment", function () {
+        console.log('Finished with three. Ready to call next.');
         deferred.resolve();
     });
     // The deferred object has a "promise" member,
@@ -33,4 +45,4 @@ function two() {
 console.log("being");
 
 one()
-    .then(two)
+    .then(two).then(three);

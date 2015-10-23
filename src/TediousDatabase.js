@@ -4,7 +4,6 @@ var ConnectionPool = require('tedious-connection-pool');
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 var Qq = require('q');
-var updater = require('./updateData');
 var bDebug = true;
 var poolConfig = {
     min: 2,
