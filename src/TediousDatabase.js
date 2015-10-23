@@ -216,18 +216,22 @@ function executeInsert(sql, parameters, callback) {
     var retval = '';
     var rowcounter = 0;
     var pool = new ConnectionPool(poolConfig, config);
-    var querySelect = "";
+    var querySelect = sql;
 
     Qq.allSettled([updateData(querySelect, parameters, pool)])
         .then(
             function (promises) {
+                console.log("promises");
                 var promiseQueryData = promises[0];
                 try {
                     //Measure results coming back from the updateData function.
                     if (promiseQueryData.state == 'fulfilled') {
+                        console.log("promises fulfilled");
                         var queryMessage = promiseQueryData.value;
                         console.log(queryMessage);
                         callback();
+                    } else {
+                        console.log("promises state not fulfilled");
                     }
                 } catch (ex) {
                     console.log(ex);
@@ -236,87 +240,47 @@ function executeInsert(sql, parameters, callback) {
             });
 
     function updateData(queryInfo, insertParameters, pool) {
-
-
+        console.log("Begin Update Data");
         var connectStat;
         var deferred = Qq.defer(); //Tell calling function that this has promise logic here as well.
-
         pool.acquire(function (err, connection) {
+            console.log("acquired connection");
             if (err) {
-                console.error(err);
+                console.log(err);
                 deferred.resolve("Connection Error" + err);
             } else {
-                connection.on('end', function () {
-                    console.log("SQL-NODE END");
-                });
-
-                connection.on('error', function (err) {
-                    console.log("SQL-NODE ERROR - " + err);
-                });
-
-                connection.on('debug', function (msgText) {
-                    console.log("SQL-NODE DEBUG - " + msgText);
-                });
-
-                connection.on('infoMessage', function (info) {
-                    console.log('SQL-NODE info: ' + info.message);
-                });
-
-                connection.on('errorMessage', function (error) {
-                    console.log('SQL-NODE info: ' + error.message);
-                });
-
-                connection.on('connect', function (err) {
+                console.log("no error connecting");
+                console.log("SQL-NODE: connected");
+                connectStat = "connect";
+                var request = new Request(queryInfo, function (err, rowCount, rows) {
+                    console.log("fulfilling request callback");
                     if (err) {
-                        console.log("SQL-NODE: connection error: " + err);
-                        deferred.resolve("No Connection");
+                        console.log("Request error executeStatement -- " + err);
+                        deferred.resolve("Request Error" + err);
+                        connection.release();
                     } else {
-                        console.log("SQL-NODE: connected");
-                        connectStat = "connect";
-                        var request = new Request(queryInfo, function (err, rowCount, rows) {
-
-                            if (err) {
-                                console.log("Request error executeStatement -- " + err);
-                                deferred.resolve("Request Error" + err);
-                                connection.release();
-                            } else {
-
-                                //When rowcount is greater than 0 then rowCount represents the number of records updated.
-
-                                console.log('Request OK your done rowCount: ' + rowCount);
-
-                                connection.release();
-
-                                deferred.resolve("Query Complete" + rowCount);
-
-                            }
-
-                        });
-
-                        for (var property in insertParameters) {
-                            var obj = insertParameters[property];
-                            console.log(property + obj.value + obj.type.name);
-                            request.addParameter(property, TYPES[obj.type.name], obj.value);
-
-                        }
-
-                        connection.execSql(request);
-
+                        //When rowcount is greater than 0 then rowCount represents the number of records updated.
+                        console.log("Request Complete");
+                        console.log('Request OK your done rowCount: ' + rowCount);
+                        connection.release();
+                        deferred.resolve("Query Complete" + rowCount);
                     }
-
                 });
+                for (var property in insertParameters) {
+                    var obj = insertParameters[property];
+                    console.log(property + obj.value + obj.type.name);
+                    request.addParameter(property, TYPES[obj.type.name], obj.value);
+                }
+                console.log("exec SQL");
+                connection.execSql(request);
             }
-            return deferred.promise; //Close off that this function has promise logic.
-
         });
+        console.log("Completed Update Data");
+        return deferred.promise; //Close off that this function has promise logic.
     }
-
-
-
     pool.on('error', function (err) {
         console.error(err);
     });
-
 }
 
 module.exports = database;
