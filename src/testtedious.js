@@ -4,8 +4,18 @@ var database = require('./TediousDatabase.js');
 //Does REST Web Services
 var express = require('express');
 var http = require('http');
+
 var path = require('path');
+var fs = require('fs');
+
+//Provides logging
 var logger = require('morgan');
+var log4js = require('log4js');
+//Automates one log per day
+var FileStreamRotator = require('file-stream-rotator');
+//Generates IDs
+var uuid = require('node-uuid');
+//Provides promises to handle sync/async issues
 var Q = require('Q');
 
 //Initial Attempt at making a repository work
@@ -23,9 +33,26 @@ var TaskNode = require('./Model/TaskNode.js');
 var TaskAssignmentHistory = require('./Model/TaskAssignmentHistory.js');
 var UserGroup = require('./Model/UserGroup.js');
 
+//Configure logger
+var theAppLog = log4js.getLogger();
+var logDirectory = __dirname + '/log';
+if (!fs.existsSync(logDirectory)) {
+    fs.mkdirSync(logDirectory);
+}
+var accessLogStream = FileStreamRotator.getStream({
+    filename: logDirectory + '/access-%DATE%.log',
+    frequency: 'daily',
+    verbose: false
+});
+
 //Initialise Web Service Config
 var app = express();
-app.use(logger('dev'));
+//Set to use loggin
+app.use(logger('dev', {
+    stream: accessLogStream
+}));
+
+
 var port = process.env.PORT || 3000;
 var host = process.env.HOST || "127.0.0.1";
 console.log("Begin Web Service");
@@ -262,7 +289,7 @@ var runRestOfServer = function () {
         .then(
             function () {
                 console.log("Load User Group");
-                taskrepo.load(UG, captureresults)
+                taskrepo.load(UG, captureresults);
             }
         )
         .then(

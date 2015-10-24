@@ -13,7 +13,7 @@ var ApprovalProcessTypes = class ApprovalProcessTypes {
         this.RegionId = properties.RegionId;
 
         this.TableName = 'ApprovalProcessTypes';
-        this.Keys = ['ApprovalProcessTypesId'];
+        this.Keys = ['ApprovalProcessId'];
     }
     toString() {
         return '${this.ApprovalProcessId} ';

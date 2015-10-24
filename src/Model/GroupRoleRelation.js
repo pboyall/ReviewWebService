@@ -4,7 +4,7 @@ var GroupRoleRelation = class GroupRoleRelation {
 
     constructor(properties) {
         this.Fields = properties;
-        this.GroupRelationId = properties.GroupRelationId;
+        this.GroupRoleRelationId = properties.GroupRoleRelationId;
         this.MasterGroupId = properties.MasterGroupId;
         this.RelativeGroupId = properties.RelativeGroupId;
         this.DateUpdated = properties.DateUpdated;
@@ -18,7 +18,7 @@ var GroupRoleRelation = class GroupRoleRelation {
         this.Keys = ['GroupRoleRelationId'];
     }
     toString() {
-        return '${this.GroupRelationId} ';
+        return '${this.GroupRoleRelationId} ';
     }
 
     theType() {

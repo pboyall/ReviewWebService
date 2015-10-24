@@ -83,7 +83,7 @@ var taskRepository =
             };
 
             this.dbContext.ConnectAndQuery(sql, resolvePromise);
-
+            //Populate the object perhaps?
             return deferred.promise;
 
         }

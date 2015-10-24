@@ -6,15 +6,17 @@
   "dependencies": {
     "async": "^1.4.2",
     "express": "^4.13.3",
+    "file-stream-rotator": "0.0.6",
     "jwt-simple": "^0.3.1",
     "log4js": "^0.6.27",
     "mongojs": "^1.4.1",
     "morgan": "^1.6.1",
+    "node-uuid": "^1.4.3",
     "q": "^1.4.1",
     "sqlite3": "^3.1.0",
     "tedious": "^1.12.3",
     "tedious-connection-pool": "^0.3.8",
-    "util": "^0.10.3",
+    "util": "^0.10.3"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
