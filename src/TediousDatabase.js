@@ -91,15 +91,20 @@ function executePooledStatement(sql, callback) {
             request.on('row', function (columns) {
                 rowcounter++;
                 console.log('Row' + rowcounter);
-
-                var colval = "";
+                //Include array "[" here if more than one row
+                if (rowcounter > 1) {
+                    var colval = "["
+                } else {
+                    var colval = "";
+                }
+                //TODO MAKE THE RETVAL valid JSON (speech marks)
                 //if (bDebug) {
                 columns.forEach(function (column) {
                     //console.log('Col ' + column.metadata.colName + ' : ' + column.value);
-                    if (colval.length > 0) {
-                        colval = colval + ",";
+                    if (colval.length > 2) {
+                        colval = colval + ", ";
                     }
-                    colval = colval + column.metadata.colName + ' : ' + column.value;
+                    colval = colval + '"' + column.metadata.colName + '" : "' + column.value + '"';
                 });
                 if (retval.length > 0) {
                     retval = retval + ",";
