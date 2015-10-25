@@ -77,12 +77,14 @@ function executePooledStatement(sql, callback) {
     var pool = new ConnectionPool(poolConfig, config);
     pool.acquire(function (err, connection) {
         if (err) {
+            console.log(sql + err);
             console.error(err);
         } else {
+            console.log("New request " + sql);
             var request = new Request(sql, function (err, rowCount, rows) {
                 //Errors are not propogating from inserts
                 if (err) {
-                    console.log("Request failed: " + err);
+                    console.log("Request failed: " + sql + err);
                 } else {
                     console.log(rowCount + ' rows');
                     connection.release();

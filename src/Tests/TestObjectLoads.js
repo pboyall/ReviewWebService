@@ -118,7 +118,7 @@ var BN = new branchnode({
 });
 
 var GR = new GroupRoleRelation({
-    GroupRelationId: _GroupRelationId
+    GroupRoleRelationId: _GroupRelationId
         /*,
             MasterGroupId: _MasterGroupId,
             RelativeGroupId: _RelativeGroupId,
@@ -177,36 +177,43 @@ message().then(
     taskrepo.load(theTaskAssignment, captureresults)
     .then(
         function () {
+            console.log("++++++++++++++++++++++++++");
             console.log("Load User Group");
             taskrepo.load(UG, captureresults);
         }
     ).then(
         function () {
+            console.log("++++++++++++++++++++++++++");
             console.log("Load Approval Process ");
             taskrepo.load(AP, captureresults);
         }
     ).then(
         function () {
+            console.log("++++++++++++++++++++++++++");
             console.log("Load Task");
             taskrepo.load(theTask, captureresults);
         }
     ).then(
         function () {
+            console.log("++++++++++++++++++++++++++");
             console.log("Load Branch Condition");
             taskrepo.load(BC, captureresults);
         }
     ).then(
         function () {
+            console.log("++++++++++++++++++++++++++");
             console.log("Load Branch Node");
             taskrepo.load(BN, captureresults);
         }
     ).then(
         function () {
+            console.log("++++++++++++++++++++++++++");
             console.log("Load Group Role");
             taskrepo.load(GR, captureresults);
         }
     ).then(
         function () {
+            console.log("++++++++++++++++++++++++++");
             console.log("Load Task Assignment History");
             taskrepo.load(theTaskAssignmentHistory, captureresults);
         }

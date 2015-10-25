@@ -66,28 +66,38 @@ var taskRepository =
         }
 
         populateObject(theObject, rows) {
-            console.log("Populate Object");
-            console.log(rows);
+            console.log("Populate Object " + theObject);
+            try {
+                console.log(rows);
+            } catch (e) {
+                console.log("Unable to log rows");
+            }
             //Rows is just a string for some reason!!!
             //And it's not valid JSON either :-(
-            var rowsobj = JSON.parse(rows);
-            for (var pop in rowsobj) {
-                console.log(pop + ":" + rowsobj[pop]);
+            try {
+                var rowsobj = JSON.parse(rows);
+
+                for (var pop in rowsobj) {
+                    console.log(pop + ":" + rowsobj[pop]);
+                }
+
+                for (var property in theObject.Fields) {
+
+
+                    console.log("Property Name: " + property);
+                    console.log("Field Value " + theObject.Fields[property]);
+                    console.log("Direct  Value " + theObject[property]);
+                    //Write out property name and value into SQL
+                    theObject.Fields[property] = rowsobj[property];
+                    theObject[property] = rowsobj[property];
+                    console.log("Post Field Value " + theObject.Fields[property]);
+                    console.log("Post Direct  Value " + theObject[property]);
+
+                }
+            } catch (e) {
+                console.log("Unable to parse rows");
             }
 
-            for (var property in theObject.Fields) {
-
-
-                console.log("Property Name: " + property);
-                console.log("Field Value " + theObject.Fields[property]);
-                console.log("Direct  Value " + theObject[property]);
-                //Write out property name and value into SQL
-                theObject.Fields[property] = rowsobj[property];
-                theObject[property] = rowsobj[property];
-                console.log("Post Field Value " + theObject.Fields[property]);
-                console.log("Post Direct  Value " + theObject[property]);
-
-            }
 
         }
 
@@ -101,7 +111,6 @@ var taskRepository =
                 criteria = "";
             }
             //if callme is not a function - sort it here
-            console.log(typeof callme);
             if (typeof callme === 'undefined') {
                 callme = function () {};
             }
@@ -124,23 +133,22 @@ var taskRepository =
                     WorkflowProcessId: 3,
                     dbContext: null
                 });
-                temptr.populateObject(theObject, rows);
+
+                if (rows !== "") {
+                    temptr.populateObject(theObject, rows);
+                } else {
+                    console.log("!!!! No rows returned from sql" + sql);
+                }
                 console.log("Status after populate: " + theObject.Status);
-                deferred.resolve();
+                console.log("RETVAL" + rows);
                 callme(rows, rowCount);
+                deferred.resolve();
                 //Populate the object perhaps?
                 //rows contains the JSON result
                 //{TaskId : 1,DateUpdated : Fri Oct 09 2015 17:44:56 GMT+0100 (GMT Daylight Time),Status : I,RaiserUserId : 1,ApprovalProcessType: 3
-                console.log("RETVAL" + rows);
-
-
             };
-
             this.dbContext.ConnectAndQuery(sql, resolvePromise);
-
-
             return deferred.promise;
-
         }
 
         save(theObject, callme) {
