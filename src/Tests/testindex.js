@@ -1,11 +1,11 @@
 'use strict';
-var database = require('./SqlliteDatabase.js');
+var database = require('../SqlliteDatabase.js');
 var express = require('express');
 var http = require('http');
 var app = express();
 //Initial Attempt at making a repository work
-var taskRepository = require('./TaskRepository.js');
-var taskAssignment = require('./TaskAssignment.js');
+var taskRepository = require('../TaskRepository.js');
+var taskAssignment = require('../TaskAssignment.js');
 
 var port = process.env.PORT || 3000;
 var host = process.env.HOST || "127.0.0.1";

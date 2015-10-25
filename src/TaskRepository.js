@@ -65,6 +65,60 @@ var taskRepository =
 
         }
 
+              populateObject(theObject) {
+            var selectSQL = "select ";
+            var updateSQL = "update " + theObject.TableName;
+            var insertSQL = "insert into " + theObject.TableName + "(";
+            var insertValues = "";
+            var insertFields = "";
+            var whereSQL = "";
+
+            for (var property in theObject.Fields) {
+                //Write out property name and value into SQL
+                if (selectSQL == "select ") {
+                    updateSQL = updateSQL + " SET ";
+
+                } else {
+                    selectSQL = selectSQL + ",";
+                    updateSQL = updateSQL + ",";
+                    insertValues = insertValues + ",";
+                    insertFields = insertFields + ",";
+                }
+                selectSQL = selectSQL + property;
+                updateSQL = updateSQL + property + "= '" + theObject.Fields[property] + "'";
+                insertValues = insertValues + "'" + theObject.Fields[property] + "'";
+                insertFields = insertFields + property;
+            }
+
+            selectSQL = selectSQL + " from " + theObject.TableName;
+            insertSQL = insertSQL + insertFields + ") VALUES (" + insertValues + ")";
+
+            theObject.Keys.map(function (item) {
+                if (whereSQL === "") {
+                    whereSQL = " where " + item + " = " + theObject[item];
+                } else {
+                    whereSQL = whereSQL + " AND " + item + " = " + theObject[item];
+                }
+
+            });
+
+            //Functionalise!
+
+            insertSQL = insertSQL;
+            updateSQL = updateSQL + whereSQL;
+            selectSQL = selectSQL + whereSQL;
+            return {
+                update: updateSQL,
+                select: selectSQL,
+                insert: insertSQL
+            };
+
+        }
+        
+        
+        
+        
+        
         load(theObject, callme) {
             var deferred = Q.defer();
 
@@ -84,6 +138,9 @@ var taskRepository =
 
             this.dbContext.ConnectAndQuery(sql, resolvePromise);
             //Populate the object perhaps?
+            
+            
+            
             return deferred.promise;
 
         }
