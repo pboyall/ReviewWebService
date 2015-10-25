@@ -1,22 +1,26 @@
 'use strict';
 
-var BranchCondition = class BranchCondition {
-
-    constructor(properties) {
-        this.Fields = properties;
-        this.ConditionId = properties.ConditionId;
-        this.ConditionTest = properties.ConditionTest;
-        this.ConditionDescription = properties.ConditionDescription;
-        this.TableName = 'BranchCondition';
-        this.Keys = ['ConditionId'];
+var BranchCondition = function (properties) {
+    if (typeof properties === 'undefined') {
+        var properties = {};
+        properties.ConditionId = "";
+        properties.ConditionTest = "";
+        properties.ConditionDescription = "";
     }
-    toString() {
+
+    this.Fields = properties;
+    this.ConditionId = properties.ConditionId;
+    this.ConditionTest = properties.ConditionTest;
+    this.ConditionDescription = properties.ConditionDescription;
+    this.TableName = 'BranchCondition';
+    this.Keys = ['ConditionId'];
+    BranchCondition.prototype.toString = function () {
         return '${this.ConditionId} ';
-    }
+    };
 
-    theType() {
+    BranchCondition.prototype.theType = function () {
         return "BranchCondition";
-    }
+    };
 };
 
 module.exports = BranchCondition;

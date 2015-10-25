@@ -2,7 +2,6 @@
 
 var task = function (properties) {
     if (typeof properties === 'undefined') {
-        // your code here.
         var properties = {};
         properties.TaskId = "";
         properties.DateUpdated = "";

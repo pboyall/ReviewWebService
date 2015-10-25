@@ -8,7 +8,7 @@ var bDebug = true;
 var poolConfig = {
     min: 2,
     max: 4,
-    log: true
+    log: false
 };
 
 var config = {

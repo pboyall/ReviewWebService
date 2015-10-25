@@ -1,72 +1,31 @@
 'use strict';
 
-var taskAssignment = class TaskAssignment {
-
-    constructor(properties) {
-        this.Fields = properties;
-        this.TaskId = properties.TaskId;
-        this.DateAssigned = properties.DateAssigned;
-        this.GroupId = properties.GroupId;
-        this.AccessType = properties.AccessType;
-        this.NodeId = properties.NodeId;
-
-        this.TableName = 'TaskAssignment';
-        this.Keys = ['TaskId', 'GroupId'];
-
-        //Maybe instead of unique properties we could have a dictionary object of name value pairs?
-        //Then we could have a generic class for all the tables
-        //Might be gettting carried away here
-
-        //var fields = {'DateAssigned','AccessType','NodeId'};
-
-        //sInsertSQL = 'Insert into ' . TableName . '(TaskId, GroupId, DateAssigned, AccessType, NodeId) Values (' . _TaskId . ',' . 
-
+var taskAssignment = function (properties) {
+    if (typeof properties === 'undefined') {
+        var properties = {};
+        properties.TaskId = "";
+        properties.DateAssigned = "";
+        properties.GroupId = "";
+        properties.AccessType = "";
+        properties.NodeId = "";
     }
+    this.Fields = properties;
+    this.TaskId = properties.TaskId;
+    this.DateAssigned = properties.DateAssigned;
+    this.GroupId = properties.GroupId;
+    this.AccessType = properties.AccessType;
+    this.NodeId = properties.NodeId;
 
-    /* If you define getters only, Node (javascript) then decides you want read only properties.  If you define nothing, you get read/write properties ipso facto do nothing.  Bonkers!
-        get TaskId() {
-            return this.make;
-        }
+    this.TableName = 'TaskAssignment';
+    this.Keys = ['TaskId', 'GroupId'];
 
-        get DateAssigned() {
-            return this.DateAssigned;
-        }
-        get GroupId() {
-            return this.GroupId;
-        }
-        get AccessType() {
-            return this.AccessType;
-        }
-        get NodeId() {
-            return this.NodeId;
-        }
-
-        set TaskId() {
-            return this.make;
-        }
-
-        set DateAssigned() {
-            return this.DateAssigned;
-        }
-        set GroupId() {
-            return this.GroupId;
-        }
-        set AccessType() {
-            return this.AccessType;
-        }
-        set NodeId() {
-            return this.NodeId;
-        }
-    */
-
-
-    toString() {
+    taskAssignment.prototype.toString = function () {
         return '${this.TaskId} ${this.DataAssigned}';
-    }
+    };
 
-    theType() {
-        return "TaskAssignment"; //Object.getPrototypeOf(this);
-    }
+    taskAssignment.prototype.theType = function () {
+        return "TaskAssignment";
+    };
 };
 
 module.exports = taskAssignment;

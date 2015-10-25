@@ -1,27 +1,37 @@
 'use strict';
 
-var ApprovalProcessTypes = class ApprovalProcessTypes {
 
-    constructor(properties) {
-        this.Fields = properties;
-        this.ApprovalProcessId = properties.ApprovalProcessId;
-        this.StartNodeId = properties.StartNodeId;
-        this.ApprovalType = properties.ApprovalType;
-        this.CompanyId = properties.CompanyId;
-        this.FunctionId = properties.FunctionId;
-        this.ProductId = properties.ProductId;
-        this.RegionId = properties.RegionId;
-
-        this.TableName = 'ApprovalProcessTypes';
-        this.Keys = ['ApprovalProcessId'];
+var ApprovalProcessTypes = function (properties) {
+    if (typeof properties === 'undefined') {
+        var properties = {};
+        properties.ApprovalProcessId = "";
+        properties.StartNodeId = "";
+        properties.ApprovalType = "";
+        properties.CompanyId = "";
+        properties.FunctionId = "";
+        properties.ProductId = "";
+        properties.RegionId = "";
     }
-    toString() {
+
+    this.Fields = properties;
+    this.ApprovalProcessId = properties.ApprovalProcessId;
+    this.StartNodeId = properties.StartNodeId;
+    this.ApprovalType = properties.ApprovalType;
+    this.CompanyId = properties.CompanyId;
+    this.FunctionId = properties.FunctionId;
+    this.ProductId = properties.ProductId;
+    this.RegionId = properties.RegionId;
+
+    this.TableName = 'ApprovalProcessTypes';
+    this.Keys = ['ApprovalProcessId'];
+
+    ApprovalProcessTypes.prototype.toString = function () {
         return '${this.ApprovalProcessId} ';
-    }
+    };
 
-    theType() {
+    ApprovalProcessTypes.prototype.theType = function () {
         return "ApprovalProcessTypes";
-    }
+    };
 };
 
 module.exports = ApprovalProcessTypes;
