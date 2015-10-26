@@ -3,6 +3,7 @@
 var taskAssignmentHistory = function (properties) {
 
     if (typeof properties === 'undefined') {
+        properties = {};
         properties.TaskId = "";
         properties.GroupId = "";
         properties.NodeId = "";
@@ -12,7 +13,7 @@ var taskAssignmentHistory = function (properties) {
         properties.ApproverId = "";
         properties.ConditionTest = "";
     }
-
+    debugger;
     this.Fields = properties;
     this.TaskId = properties.TaskId;
     this.GroupId = properties.GroupId;

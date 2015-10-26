@@ -1,8 +1,11 @@
 'use strict';
+var chalk = require('chalk');
+var logger = require('../logger');
 //Database Handler (can plug in SqlliteDatabase.js instead)
 var database = require('../TediousDatabase.js');
 //Provides promises to handle sync/async issues
 var Q = require('Q');
+var deferred1 = Q.defer();
 //Initial Attempt at making a repository work
 var taskRepository = require('../TaskRepository.js');
 //The classes that map to the database tables (one on one mapping)
@@ -14,31 +17,38 @@ var BranchCondition = require('../Model/BranchCondition.js');
 var branchnode = require('../Model/BranchNode.js');
 var GroupRoleRelation = require('../Model/GroupRoleRelation.js');
 var TaskNode = require('../Model/TaskNode.js');
-var TaskAssignmentHistory = require('../Model/TaskAssignmentHistory.js');
+var TAH = require('../Model/TaskAssignmentHistory.js');
 var UserGroup = require('../Model/UserGroup.js');
 //Sanity Kill Method for entire Node Module
-process.on('uncaughtException', function (err) {
-    console.log('Uncaught Exception ' + err + ' , quitting');
-    process.exit(1);
-});
+//process.on('uncaughtException', function (err) {
+//    log.debug('Uncaught Exception ' + err + ' , quitting');
+//    process.exit(1);
+//});
+
+var log = logger.LOG;
+log.trace("Trace Log Started");
+log.debug("Debug log started");
 
 //Create the database object to inject into everything
 var db = new database();
 
 //Run Checks to ensure database is up
 var myf = function myfunc(rows, rowCount) {
-    console.log("Database connection varified");
-    console.log("****************************************************************");
+    log.debug("Database connection verified");
+    log.debug("############################################################");
+    log.debug("############################################################");
+    log.debug("############################################################");
+    runRestOfServer();
 };
-console.log("****************************************************************");
-console.log("System Verification Tasks");
+log.debug("****************************************************************");
+log.debug("System Verification Tasks");
 
 db.ConnectAndQuery("select * from Task", myf);
 
 //Dummy Values
 var _TaskId = 1;
 var _DateAssigned = '2015-01-15';
-var _GroupId = '1';
+var _GroupId = '3';
 var _AccessType = 1;
 var _NodeId = 1;
 var _DateUpdated = '2015-01-16';
@@ -51,13 +61,13 @@ var _FunctionId = 1;
 var _ProductId = 1;
 var _RegionId = 1;
 var _GuardId = 1;
-var _ApprovalProcessId = 1;
+var _ApprovalProcessId = 3;
 var _ApprovalProcessType = 3;
 var _ConditionId = 1;
 var _ConditionTest = 1;
 var _ConditionDescription = 1;
 var _OutputNodeId = 1;
-var _GroupRelationId = 1;
+var _GroupRelationId = 3;
 var _MasterGroupId = 1;
 var _RelativeGroupId = 1;
 var _Enabled = 1;
@@ -67,155 +77,212 @@ var _EndDate = '2015-04-30';
 var _GroupRoleWeight = 1;
 var _Type = 1;
 var _Outcome = 1;
-var _TaskAssignmentHistoryId = 1;
+var _TaskAssignmentHistoryId = 4;
 var _ApproverId = 1;
 var _PersonId = 1;
 
-var theTaskAssignment = new taskAssignment({
-    TaskId: _TaskId,
-    //    DateAssigned: _DateAssigned,
-    GroupId: _GroupId,
-    //    AccessType: _AccessType,
-    //    NodeId: _NodeId
-});
 
-var theTask = new task({
-    TaskId: _TaskId
-        //    ,
-        //    DateUpdated: _DateUpdated,
-        //    Status: _Status,
-        //    RaiserUserId: _RaiserUserId,
-        //    ApprovalProcessType: _ApprovalProcessType
-});
+var runRestOfServer = function () {
 
-var AP = new ApprovalProcessTypes({
-    ApprovalProcessId: _ApprovalProcessId
-        /*,
-            StartNodeId: _StartNodeId,
-            ApprovalType: _ApprovalType,
-            CompanyId: _CompanyId,
-            FunctionId: _FunctionId,
-            ProductId: _ProductId,
-            RegionId: _RegionId*/
-});
+    var theTaskAssignment = new taskAssignment();
+    theTaskAssignment.TaskId = _TaskId;
+    theTaskAssignment.GroupId = _GroupId;
+    var theTask = new task();
+    theTask.TaskId = _TaskId;
+    var AP = new ApprovalProcessTypes();
+    AP.ApprovalProcessId = _ApprovalProcessId;
+    var BC = new BranchCondition();
+    BC.ConditionId = _ConditionId;
+    var BN = new branchnode();
+    BN.GuardId = _GuardId;
+    var GR = new GroupRoleRelation();
+    GR.GroupRelationId = _GroupRelationId;
+    debugger;
+    var theTaskAssignmentHistory = new TAH();
+    theTaskAssignmentHistory.TaskAssignmentHistoryId = _TaskAssignmentHistoryId;
 
-var BC = new BranchCondition({
-    ConditionId: _ConditionId
-        /*,
-            ConditionTest: _ConditionTest,
-            ConditionDescription: _ConditionDescription*/
-});
+    var UG = new UserGroup();
+    UG.GroupId = _GroupId;
+    UG.PersonId = _PersonId;
+    UG.DateUpdated = _DateUpdated;
 
-var BN = new branchnode({
-    GuardId: _GuardId
-        /*,
-        NodeId: _NodeId,
-        OutputNodeId: _OutputNodeId,
-        ConditionId: _ConditionId,
-        RelationTypeId: _RelationTypeId,
-        Type: _Type,
-        AccessType: _AccessType*/
-});
+    var captureresults = function (rows, rowCount) {
+        log.debug("Result Capture:" + rowCount);
+        log.debug(rows);
+        log.debug(chalk.green("====================================="));
+        deferred1.resolve();
+    };
 
-var GR = new GroupRoleRelation({
-    GroupRoleRelationId: _GroupRelationId
-        /*,
-            MasterGroupId: _MasterGroupId,
-            RelativeGroupId: _RelativeGroupId,
-            DateUpdated: _DateUpdated,
-            Enabled: _Enabled,
-            RelationTypeId: _RelationTypeId,
-            StartDate: _StartDate,
-            EndDate: _EndDate,
-            ApprovalProcessId: _ApprovalProcessId,
-            GroupRoleWeight: _GroupRoleWeight*/
-});
 
-var theTaskAssignmentHistory = new TaskAssignmentHistory({
-    /*    TaskId: _TaskId,
-        GroupId: _GroupId,
-        NodeId: _NodeId,
-        DateUpdated: _DateUpdated,
-        Outcome: _Outcome,*/
-    TaskAssignmentHistoryId: _TaskAssignmentHistoryId
-        /*,
-        ApproverId: _ApproverId,
-        ConditionTest: _ConditionTest*/
-});
+    var taskrepo = new taskRepository({
+        WorkflowProcessId: 3,
+        dbContext: db
+    });
 
-var UG = new UserGroup({
-    GroupId: _GroupId,
-    PersonId: _PersonId,
-    DateUpdated: _DateUpdated
-        /*,
-            Enabled: _Enabled,
-            StartDate: _StartDate,
-            EndDate: _EndDate*/
-});
-var deferred = Q.defer();
+    var message = function () {
+        var def = Q.defer();
+        log.debug("Load Task Assignment");
+        def.resolve();
+        return def.promise;
+    };
 
-var captureresults = function (rows, rowCount) {
-    console.log("Result Capture:" + rowCount);
-    console.log(rows);
-    console.log("=====================================");
-    deferred.resolve();
+
+    function UserGroupProcess() {
+        var deferred = Q.defer();
+        log.debug(chalk.blue("+++++++++++++++++++++"));
+        log.debug("Load User Group");
+        taskrepo.load(UG, captureresults);
+        return deferred.promise;
+    }
+
+    function ApprovalProcess() {
+        var deferred = Q.defer();
+        log.debug(chalk.blue("+++++++++++++++++++++"));
+        log.debug("Load Approval Process ");
+        taskrepo.load(AP, captureresults);
+        return deferred.promise;
+    }
+
+    function TaskProcess() {
+        var deferred = Q.defer();
+        log.debug(chalk.blue("+++++++++++++++++++++"));
+        log.debug("Load Task");
+        taskrepo.load(theTask, captureresults);
+        return deferred.promise;
+    }
+
+    function Branch() {
+        var deferred = Q.defer();
+        log.debug(chalk.blue("+++++++++++++++++++++"));
+        log.debug("Load Branch Condition");
+        taskrepo.load(BC, captureresults);
+        return deferred.promise;
+    }
+
+    function bNode() {
+        var deferred = Q.defer();
+        log.debug(chalk.blue("+++++++++++++++++++++"));
+        log.debug("Load Branch Node");
+        taskrepo.load(BN, captureresults);
+        return deferred.promise;
+    }
+
+    function GroupR() {
+        var deferred = Q.defer();
+        log.debug(chalk.blue("+++++++++++++++++++++"));
+        log.debug("Load Group Role");
+        taskrepo.load(GR, captureresults);
+        return deferred.promise;
+    }
+
+    function TA() {
+        var deferred1 = Q.defer();
+        log.debug(chalk.blue("+++++++++++++++++++++"));
+        log.debug("Load Task Assignment History");
+        taskrepo.load(theTaskAssignmentHistory, captureresults);
+        return deferred1.promise;
+    }
+    /*
+    message()
+        .then(taskrepo.load(theTaskAssignment, captureresults))
+        .then(taskrepo.load(AP, captureresults))
+                .then(taskrepo.load(UG, captureresults))
+                .then(taskrepo.load(theTask, captureresults))
+                .then(taskrepo.load(BC, captureresults))
+                .then(taskrepo.load(BN, captureresults))
+                .then(taskrepo.load(GR, captureresults))
+                .then(TA)
+                .then(taskrepo.load(theTaskAssignmentHistory, captureresults))
+
+    ;
+                */
+    /*
+        UserGroupProcess().then(function () {
+            process.exit()
+        });
+      */
+    message().then(
+        taskrepo.load(theTaskAssignment, captureresults)
+        .then(
+            function () {
+                deferred1 = Q.defer();
+                log.debug("Load User Group");
+                taskrepo.load(UG, captureresults);
+                return deferred1.promise;
+            }
+        ).then(
+            function () {
+                deferred1 = Q.defer();
+                log.debug("Load Approval Process ");
+                taskrepo.load(AP, captureresults);
+                return deferred1.promise;
+            }
+        ).then(
+            function () {
+                deferred1 = Q.defer();
+                log.debug("Load Task");
+                taskrepo.load(theTask, captureresults);
+                return deferred1.promise;
+            }
+        ).then(
+            function () {
+                deferred1 = Q.defer();
+                log.debug("Load Branch Condition");
+                taskrepo.load(BC, captureresults);
+                return deferred1.promise;
+            }
+        ).then(
+            function () {
+                deferred1 = Q.defer();
+                log.debug("Load Branch Node");
+                taskrepo.load(BN, captureresults);
+                return deferred1.promise;
+            }
+        ).then(
+            function () {
+                deferred1 = Q.defer();
+                log.debug("Load Group Role");
+                taskrepo.load(GR, captureresults);
+                return deferred1.promise;
+            }
+        ).then(
+            function () {
+                deferred1 = Q.defer();
+                log.debug("Load Task Assignment History");
+                taskrepo.load(theTaskAssignmentHistory, captureresults);
+                return deferred1.promise;
+            }
+        ).then(
+            function () {
+                //Iterate all the objects?
+
+                var objArray = [];
+                objArray.push(theTaskAssignment);
+                objArray.push(theTask);
+                objArray.push(AP);
+                objArray.push(BC);
+                objArray.push(BN);
+                objArray.push(GR);
+                objArray.push(theTaskAssignmentHistory);
+                objArray.push(UG);
+                for (var index in objArray) {
+                    var theObject = objArray[index];
+                    log.debug(theObject);
+                    //for (var property in theObject.Fields) {
+                    //  log.debug("property");
+                    //log.debug(property + "= " + theObject.Fields[property]);
+                    //}
+
+                }
+                return deferred1.promise;
+            }
+        )
+    );
+
+
+
+
+
+
+
 };
-
-var taskrepo = new taskRepository({
-    WorkflowProcessId: 3,
-    dbContext: db
-});
-
-var message = function () {
-    var def = Q.defer();
-    console.log("Load Task Assignment");
-    def.resolve();
-    return def.promise;
-};
-
-message().then(
-    taskrepo.load(theTaskAssignment, captureresults)
-    .then(
-        function () {
-            console.log("++++++++++++++++++++++++++");
-            console.log("Load User Group");
-            taskrepo.load(UG, captureresults);
-        }
-    ).then(
-        function () {
-            console.log("++++++++++++++++++++++++++");
-            console.log("Load Approval Process ");
-            taskrepo.load(AP, captureresults);
-        }
-    ).then(
-        function () {
-            console.log("++++++++++++++++++++++++++");
-            console.log("Load Task");
-            taskrepo.load(theTask, captureresults);
-        }
-    ).then(
-        function () {
-            console.log("++++++++++++++++++++++++++");
-            console.log("Load Branch Condition");
-            taskrepo.load(BC, captureresults);
-        }
-    ).then(
-        function () {
-            console.log("++++++++++++++++++++++++++");
-            console.log("Load Branch Node");
-            taskrepo.load(BN, captureresults);
-        }
-    ).then(
-        function () {
-            console.log("++++++++++++++++++++++++++");
-            console.log("Load Group Role");
-            taskrepo.load(GR, captureresults);
-        }
-    ).then(
-        function () {
-            console.log("++++++++++++++++++++++++++");
-            console.log("Load Task Assignment History");
-            taskrepo.load(theTaskAssignmentHistory, captureresults);
-        }
-    )
-);

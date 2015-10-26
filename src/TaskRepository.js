@@ -1,6 +1,9 @@
 'use strict';
 var sprint = require('./library/stringfunctions.js');
 var Q = require('Q');
+var chalk = require('chalk');
+var logger = require('./logger');
+var log = logger.LOG;
 
 var taskRepository =
 
@@ -65,47 +68,67 @@ var taskRepository =
 
         }
 
-        populateObject(theObject, rows) {
+        populateObject(theObject, rows, rowindex) {
+
+            //If there is more than one row this could be interesting - return the last row in the object and handle it at higher level?  Didn't really plan this one ... don't want to return an array of objects or break the interface now
+            if (typeof rowindex === 'undefined') {
+                rowindex = 0;
+            } else {
+                log.info("Return row" + rowindex);
+            }
+
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + theObject);
             console.log("Populate Object " + theObject);
             try {
-                console.log(rows);
+                log.info(rows);
             } catch (e) {
-                console.log("Unable to log rows");
+                log.error(chalk.red("Unable to log rows"));
             }
+
+            var parsedJSON;
+
             //Rows is just a string for some reason!!!
             //And it's not valid JSON either :-(
             try {
-                var rowsobj = JSON.parse(rows);
-
-                for (var pop in rowsobj) {
-                    console.log(pop + ":" + rowsobj[pop]);
-                }
-
-                for (var property in theObject.Fields) {
-
-
-                    console.log("Property Name: " + property);
-                    console.log("Field Value " + theObject.Fields[property]);
-                    console.log("Direct  Value " + theObject[property]);
-                    //Write out property name and value into SQL
-                    theObject.Fields[property] = rowsobj[property];
-                    theObject[property] = rowsobj[property];
-                    console.log("Post Field Value " + theObject.Fields[property]);
-                    console.log("Post Direct  Value " + theObject[property]);
-
-                }
+                parsedJSON = JSON.parse(rows);
             } catch (e) {
-                console.log("Unable to parse rows");
+                log.error(chalk.red("Unable to parse rows"));
             }
+
+            console.log("Parsed JSON" + parsedJSON);
+            console.log(JSON.stringify(parsedJSON[0]));
+
+            var rowsobj;
+            if (parsedJSON.length > 1) {
+                console.log("More than one row - returning row" + rowindex);
+                rowsobj = parsedJSON[rowindex];
+            } else {
+                rowsobj = parsedJSON;
+            }
+
+            console.log("Object to populate from" + rowsobj);
+
+            for (var pop in rowsobj) {
+                console.log(pop + ":" + rowsobj[pop]);
+            }
+            for (var property in theObject.Fields) {
+                log.debug("Retrived value" + rowsobj[property]);
+                log.debug("Property Name: " + property);
+                log.debug("Field Value " + theObject.Fields[property]);
+                log.debug("Direct  Value " + theObject[property]);
+                //Write out property name and value into SQL
+                theObject.Fields[property] = rowsobj[property];
+                theObject[property] = rowsobj[property];
+                log.debug("Post Field Value " + theObject.Fields[property]);
+                log.debug("Post Direct  Value " + theObject[property]);
+            }
+
 
 
         }
 
 
-
-
-
-        load(theObject, callme, criteria) {
+        load(theObject, callme, criteria, rowindex) {
             var deferred = Q.defer();
             if (typeof criteria === 'undefined') {
                 criteria = "";
@@ -124,7 +147,7 @@ var taskRepository =
             var sql = sqlobj.select;
             //Add criteria
             sql = sql + ' ' + criteria;
-            console.log(sql);
+            console.log('Determined SQL for query = ' + sql);
             //Resolve promise then call callback
             var resolvePromise = function (rows, rowCount) {
                 //Can't get it to talk to itself for some reason so create a new one to use the static method
@@ -135,12 +158,13 @@ var taskRepository =
                 });
 
                 if (rows !== "") {
-                    temptr.populateObject(theObject, rows);
+                    //if more than one row, um ... 
+                    temptr.populateObject(theObject, rows, rowindex);
                 } else {
-                    console.log("!!!! No rows returned from sql" + sql);
+                    console.log(chalk.red("!!!! No rows returned from sql ") + sql);
                 }
-                console.log("Status after populate: " + theObject.Status);
                 console.log("RETVAL" + rows);
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + theObject);
                 callme(rows, rowCount);
                 deferred.resolve();
                 //Populate the object perhaps?

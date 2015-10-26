@@ -92,13 +92,10 @@ function executePooledStatement(sql, callback) {
             });
             request.on('row', function (columns) {
                 rowcounter++;
+                var colval;
                 console.log('Row' + rowcounter);
                 //Include array "[" here if more than one row
-                if (rowcounter > 1) {
-                    var colval = "["
-                } else {
-                    var colval = "";
-                }
+                colval = "";
                 //TODO MAKE THE RETVAL valid JSON (speech marks)
                 //if (bDebug) {
                 columns.forEach(function (column) {
@@ -116,16 +113,21 @@ function executePooledStatement(sql, callback) {
             });
 
             request.on('doneInProc', function (rowCount, more, rows) {
-                console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++');
+                console.log('DIP++++++++++++++++++++++++++++++++++++++++++++++++++++DIP');
                 console.log('In Proc Database done');
-                console.log(retval);
-                console.log(rowCount);
-                console.log(more);
+                console.log('Proc Retval' + retval);
+                console.log('Proc RowCount ' + rowCount);
+                console.log('Proc More' + more);
 
-                console.log('Close connection');
+                console.log('Proc Close connection');
                 connection.release();
+                if (rowCount > 1) {
+                    retval = "[" + retval + "]";
+                }
                 callback(retval, rowCount);
-                console.log('-------------------------------------------------------');
+                console.log('End of In Proc Done');
+                console.log('DIP-------------------------------------------------------DIP');
+
             });
 
             connection.execSql(request);

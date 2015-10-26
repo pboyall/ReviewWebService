@@ -2,7 +2,7 @@
 
 var BranchCondition = function (properties) {
     if (typeof properties === 'undefined') {
-        var properties = {};
+        properties = {};
         properties.ConditionId = "";
         properties.ConditionTest = "";
         properties.ConditionDescription = "";

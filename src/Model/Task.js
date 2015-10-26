@@ -9,6 +9,7 @@ var task = function (properties) {
         properties.RaiserUserId = "";
         properties.ApprovalProcessType = "";
     }
+    //If you specify one property only in the constructor, you lose all the others
     this.Fields = properties;
     this.TaskId = properties.TaskId;
     this.DateUpdated = properties.DateAssigned;

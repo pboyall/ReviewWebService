@@ -2,8 +2,8 @@
 
 var GroupRoleRelation = function GroupRoleRelation(properties) {
     if (typeof properties === 'undefined') {
-        var properties = {};
-        properties.GroupRoleRelationId = "";
+        properties = {};
+        properties.GroupRelationId = "";
         properties.MasterGroupId = "";
         properties.RelativeGroupId = "";
         properties.DateUpdated = "";
@@ -15,7 +15,7 @@ var GroupRoleRelation = function GroupRoleRelation(properties) {
         properties.GroupRoleWeight = "";
     }
     this.Fields = properties;
-    this.GroupRoleRelationId = properties.GroupRoleRelationId;
+    this.GroupRelationId = properties.GroupRelationId;
     this.MasterGroupId = properties.MasterGroupId;
     this.RelativeGroupId = properties.RelativeGroupId;
     this.DateUpdated = properties.DateUpdated;
@@ -26,9 +26,9 @@ var GroupRoleRelation = function GroupRoleRelation(properties) {
     this.ApprovalProcessId = properties.ApprovalProcessId;
     this.GroupRoleWeight = properties.GroupRoleWeight;
     this.TableName = 'GroupRoleRelation';
-    this.Keys = ['GroupRoleRelationId'];
+    this.Keys = ['GroupRelationId'];
     GroupRoleRelation.prototype.toString = function () {
-        return '${this.GroupRoleRelationId} ';
+        return '${this.GroupRelationId} ';
     };
 
     GroupRoleRelation.prototype.theType = function () {

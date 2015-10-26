@@ -2,7 +2,7 @@
 
 var branchnode = function (properties) {
     if (typeof properties === 'undefined') {
-        var properties = {};
+        properties = {};
         properties.GuardId = "";
         properties.NodeId = "";
         properties.OutputNodeId = "";

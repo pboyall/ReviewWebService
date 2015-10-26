@@ -2,7 +2,7 @@
 
 var taskAssignment = function (properties) {
     if (typeof properties === 'undefined') {
-        var properties = {};
+        properties = {};
         properties.TaskId = "";
         properties.DateAssigned = "";
         properties.GroupId = "";
