@@ -1,3 +1,5 @@
+//Directly running Update SQL against the database using promises to capture errors
+
 var TYPES = require('tedious').TYPES;
 var Request = require('tedious').Request;
 var Qq = require('q');

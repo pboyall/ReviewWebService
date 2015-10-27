@@ -5,8 +5,6 @@ var sprint = require('./library/stringfunctions.js');
 /*
 Have included GroupId in TaskNode and TaskAssignment to allow for workflows where a given step is assigned to multiple groups 
 Consider merging TaskAssignment and TaskNode 
-
-
 */
 
 //Database Handler (can plug in SqlliteDatabase.js instead)
@@ -28,7 +26,6 @@ var GroupRoleRelation = require('./Model/GroupRoleRelation.js');
 var TaskNode = require('./Model/TaskNode.js');
 var TaskAssignmentHistory = require('./Model/TaskAssignmentHistory.js');
 var UserGroup = require('./Model/UserGroup.js');
-var Q = require('Q');
 
 var db = new database();
 var newString = new sprint();
@@ -39,21 +36,16 @@ module.exports.InitialiseWorkflow = function (UserId, ApprovalProcessId) {
     var startNode = "";
     var sSQL = "";
     //var wf = new wff();
-    //Should really use Task Repository - need speed not future proofing right now
+    //Should really use Task Repository for everything - need speed not future proofing right now
     var taskrepo = new taskRepository({
         WorkflowProcessId: ApprovalProcessId,
         dbContext: db
     });
 
-    var AP = new ApprovalProcessTypes({
-        ApprovalProcessId: ApprovalProcessId,
-        StartNodeId: "",
-        ApprovalType: "",
-        CompanyId: "",
-        FunctionId: "",
-        ProductId: "",
-        RegionId: ""
-    });
+    //Should be using the objects for everything and not direct SQL but bypassing where I don't have time
+
+    var AP = new ApprovalProcessTypes()
+    AP.ApprovalProcessId = ApprovalProcessId;
 
     var captureresults = function (rows, rowCount) {
         console.log("Result Capture: " + rowCount + " row returned");

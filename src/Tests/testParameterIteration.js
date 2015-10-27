@@ -1,3 +1,5 @@
+//How to itereate the insert parameters for a procedure
+
 var TYPES = require('tedious').TYPES;
 
 var insertParameter = {};

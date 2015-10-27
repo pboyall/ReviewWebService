@@ -1,3 +1,5 @@
+//Test iterating the properties of an object and building the SQL from the object definition
+
 'use strict';
 var database = require('./TediousDatabase.js');
 var taskAssignment = require('./TaskAssignment.js');

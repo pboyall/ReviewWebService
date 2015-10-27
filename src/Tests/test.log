@@ -4412,3 +4412,452 @@
   EndDate: 'null',
   TableName: 'UserGroup',
   Keys: [ 'GroupId' ] }
+[2015-10-27 09:51:42.012] [DEBUG] ReviewService - Debug log started
+[2015-10-27 09:51:42.016] [DEBUG] ReviewService - ****************************************************************
+[2015-10-27 09:51:42.016] [DEBUG] ReviewService - System Verification Tasks
+[2015-10-27 09:51:42.073] [DEBUG] ReviewService - Database connection verified
+[2015-10-27 09:51:42.073] [DEBUG] ReviewService - ############################################################
+[2015-10-27 09:51:42.073] [DEBUG] ReviewService - ############################################################
+[2015-10-27 09:51:42.074] [DEBUG] ReviewService - ############################################################
+[2015-10-27 09:51:42.075] [DEBUG] ReviewService - Load Task Assignment
+[2015-10-27 09:51:42.104] [DEBUG] ReviewService - Result Capture:0
+[2015-10-27 09:51:42.104] [DEBUG] ReviewService - 
+[2015-10-27 09:51:42.104] [DEBUG] ReviewService - [32m=====================================[39m
+[2015-10-27 09:51:42.106] [DEBUG] ReviewService - Load User Group
+[2015-10-27 09:51:42.132] [INFO] ReviewService - [{"GroupId" : "3", "PersonId" : "4", "DateUpdated" : "Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)", "Enabled" : "1", "StartDate" : "null", "EndDate" : "null" },{"GroupId" : "3", "PersonId" : "14", "DateUpdated" : "Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)", "Enabled" : "1", "StartDate" : "null", "EndDate" : "null" }]
+[2015-10-27 09:51:42.136] [DEBUG] ReviewService - Retrived value3
+[2015-10-27 09:51:42.137] [DEBUG] ReviewService - Property Name: GroupId
+[2015-10-27 09:51:42.137] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.143] [DEBUG] ReviewService - Direct  Value 3
+[2015-10-27 09:51:42.144] [DEBUG] ReviewService - Post Field Value 3
+[2015-10-27 09:51:42.144] [DEBUG] ReviewService - Post Direct  Value 3
+[2015-10-27 09:51:42.145] [DEBUG] ReviewService - Retrived value4
+[2015-10-27 09:51:42.145] [DEBUG] ReviewService - Property Name: PersonId
+[2015-10-27 09:51:42.145] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.145] [DEBUG] ReviewService - Direct  Value 1
+[2015-10-27 09:51:42.148] [DEBUG] ReviewService - Post Field Value 4
+[2015-10-27 09:51:42.149] [DEBUG] ReviewService - Post Direct  Value 4
+[2015-10-27 09:51:42.150] [DEBUG] ReviewService - Retrived valueSat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.150] [DEBUG] ReviewService - Property Name: DateUpdated
+[2015-10-27 09:51:42.150] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.151] [DEBUG] ReviewService - Direct  Value 2015-01-16
+[2015-10-27 09:51:42.151] [DEBUG] ReviewService - Post Field Value Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.155] [DEBUG] ReviewService - Post Direct  Value Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.156] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.156] [DEBUG] ReviewService - Property Name: Enabled
+[2015-10-27 09:51:42.156] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.157] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.163] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.163] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.165] [DEBUG] ReviewService - Retrived valuenull
+[2015-10-27 09:51:42.165] [DEBUG] ReviewService - Property Name: StartDate
+[2015-10-27 09:51:42.166] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.166] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.167] [DEBUG] ReviewService - Post Field Value null
+[2015-10-27 09:51:42.169] [DEBUG] ReviewService - Post Direct  Value null
+[2015-10-27 09:51:42.170] [DEBUG] ReviewService - Retrived valuenull
+[2015-10-27 09:51:42.170] [DEBUG] ReviewService - Property Name: EndDate
+[2015-10-27 09:51:42.170] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.170] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.171] [DEBUG] ReviewService - Post Field Value null
+[2015-10-27 09:51:42.171] [DEBUG] ReviewService - Post Direct  Value null
+[2015-10-27 09:51:42.176] [DEBUG] ReviewService - Result Capture:2
+[2015-10-27 09:51:42.177] [DEBUG] ReviewService - [{"GroupId" : "3", "PersonId" : "4", "DateUpdated" : "Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)", "Enabled" : "1", "StartDate" : "null", "EndDate" : "null" },{"GroupId" : "3", "PersonId" : "14", "DateUpdated" : "Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)", "Enabled" : "1", "StartDate" : "null", "EndDate" : "null" }]
+[2015-10-27 09:51:42.182] [DEBUG] ReviewService - [32m=====================================[39m
+[2015-10-27 09:51:42.184] [DEBUG] ReviewService - Load Approval Process 
+[2015-10-27 09:51:42.218] [INFO] ReviewService - {"ApprovalProcessId" : "3", "StartNodeId" : "1", "ApprovalType" : "Sequential", "CompanyId" : "1", "FunctionId" : "1", "ProductId" : "1", "RegionId" : "1" }
+[2015-10-27 09:51:42.224] [DEBUG] ReviewService - Retrived value3
+[2015-10-27 09:51:42.224] [DEBUG] ReviewService - Property Name: ApprovalProcessId
+[2015-10-27 09:51:42.224] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.225] [DEBUG] ReviewService - Direct  Value 3
+[2015-10-27 09:51:42.225] [DEBUG] ReviewService - Post Field Value 3
+[2015-10-27 09:51:42.225] [DEBUG] ReviewService - Post Direct  Value 3
+[2015-10-27 09:51:42.225] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.225] [DEBUG] ReviewService - Property Name: StartNodeId
+[2015-10-27 09:51:42.226] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.226] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.226] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.226] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.226] [DEBUG] ReviewService - Retrived valueSequential
+[2015-10-27 09:51:42.227] [DEBUG] ReviewService - Property Name: ApprovalType
+[2015-10-27 09:51:42.230] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.230] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.230] [DEBUG] ReviewService - Post Field Value Sequential
+[2015-10-27 09:51:42.231] [DEBUG] ReviewService - Post Direct  Value Sequential
+[2015-10-27 09:51:42.231] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.231] [DEBUG] ReviewService - Property Name: CompanyId
+[2015-10-27 09:51:42.231] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.236] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.236] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.237] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.237] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.237] [DEBUG] ReviewService - Property Name: FunctionId
+[2015-10-27 09:51:42.237] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.237] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.242] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.243] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.243] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.243] [DEBUG] ReviewService - Property Name: ProductId
+[2015-10-27 09:51:42.243] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.243] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.244] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.248] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.249] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.249] [DEBUG] ReviewService - Property Name: RegionId
+[2015-10-27 09:51:42.249] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.249] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.250] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.250] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.255] [DEBUG] ReviewService - Result Capture:1
+[2015-10-27 09:51:42.255] [DEBUG] ReviewService - {"ApprovalProcessId" : "3", "StartNodeId" : "1", "ApprovalType" : "Sequential", "CompanyId" : "1", "FunctionId" : "1", "ProductId" : "1", "RegionId" : "1" }
+[2015-10-27 09:51:42.255] [DEBUG] ReviewService - [32m=====================================[39m
+[2015-10-27 09:51:42.261] [DEBUG] ReviewService - Load Task
+[2015-10-27 09:51:42.287] [INFO] ReviewService - {"TaskId" : "1", "DateUpdated" : "Mon Oct 26 2015 15:54:05 GMT+0000 (GMT Standard Time)", "Status" : "I", "RaiserUserId" : "1", "ApprovalProcessType" : "3" }
+[2015-10-27 09:51:42.289] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.289] [DEBUG] ReviewService - Property Name: TaskId
+[2015-10-27 09:51:42.289] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.290] [DEBUG] ReviewService - Direct  Value 1
+[2015-10-27 09:51:42.290] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.290] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.290] [DEBUG] ReviewService - Retrived valueMon Oct 26 2015 15:54:05 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.290] [DEBUG] ReviewService - Property Name: DateUpdated
+[2015-10-27 09:51:42.291] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.294] [DEBUG] ReviewService - Direct  Value undefined
+[2015-10-27 09:51:42.294] [DEBUG] ReviewService - Post Field Value Mon Oct 26 2015 15:54:05 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.294] [DEBUG] ReviewService - Post Direct  Value Mon Oct 26 2015 15:54:05 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.294] [DEBUG] ReviewService - Retrived valueI
+[2015-10-27 09:51:42.295] [DEBUG] ReviewService - Property Name: Status
+[2015-10-27 09:51:42.299] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.300] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.302] [DEBUG] ReviewService - Post Field Value I
+[2015-10-27 09:51:42.304] [DEBUG] ReviewService - Post Direct  Value I
+[2015-10-27 09:51:42.304] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.304] [DEBUG] ReviewService - Property Name: RaiserUserId
+[2015-10-27 09:51:42.305] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.305] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.305] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.306] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.306] [DEBUG] ReviewService - Retrived value3
+[2015-10-27 09:51:42.306] [DEBUG] ReviewService - Property Name: ApprovalProcessType
+[2015-10-27 09:51:42.307] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.307] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.311] [DEBUG] ReviewService - Post Field Value 3
+[2015-10-27 09:51:42.311] [DEBUG] ReviewService - Post Direct  Value 3
+[2015-10-27 09:51:42.312] [DEBUG] ReviewService - Result Capture:1
+[2015-10-27 09:51:42.314] [DEBUG] ReviewService - {"TaskId" : "1", "DateUpdated" : "Mon Oct 26 2015 15:54:05 GMT+0000 (GMT Standard Time)", "Status" : "I", "RaiserUserId" : "1", "ApprovalProcessType" : "3" }
+[2015-10-27 09:51:42.317] [DEBUG] ReviewService - [32m=====================================[39m
+[2015-10-27 09:51:42.319] [DEBUG] ReviewService - Load Branch Condition
+[2015-10-27 09:51:42.352] [INFO] ReviewService - {"ConditionId" : "1", "ConditionTest" : "Success", "ConditionDescription" : "Submission Success" }
+[2015-10-27 09:51:42.355] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.355] [DEBUG] ReviewService - Property Name: ConditionId
+[2015-10-27 09:51:42.355] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.355] [DEBUG] ReviewService - Direct  Value 1
+[2015-10-27 09:51:42.356] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.356] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.356] [DEBUG] ReviewService - Retrived valueSuccess
+[2015-10-27 09:51:42.356] [DEBUG] ReviewService - Property Name: ConditionTest
+[2015-10-27 09:51:42.356] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.357] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.357] [DEBUG] ReviewService - Post Field Value Success
+[2015-10-27 09:51:42.357] [DEBUG] ReviewService - Post Direct  Value Success
+[2015-10-27 09:51:42.357] [DEBUG] ReviewService - Retrived valueSubmission Success
+[2015-10-27 09:51:42.357] [DEBUG] ReviewService - Property Name: ConditionDescription
+[2015-10-27 09:51:42.358] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.358] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.358] [DEBUG] ReviewService - Post Field Value Submission Success
+[2015-10-27 09:51:42.359] [DEBUG] ReviewService - Post Direct  Value Submission Success
+[2015-10-27 09:51:42.361] [DEBUG] ReviewService - Result Capture:1
+[2015-10-27 09:51:42.361] [DEBUG] ReviewService - {"ConditionId" : "1", "ConditionTest" : "Success", "ConditionDescription" : "Submission Success" }
+[2015-10-27 09:51:42.361] [DEBUG] ReviewService - [32m=====================================[39m
+[2015-10-27 09:51:42.366] [DEBUG] ReviewService - Load Branch Node
+[2015-10-27 09:51:42.394] [INFO] ReviewService - {"GuardId" : "1", "NodeId" : "5", "OutputNodeId" : "9", "ConditionId" : "1", "RelationTypeId" : "1", "Type" : "FirstApprovalNodeSequential", "AccessType" : "1" }
+[2015-10-27 09:51:42.396] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.397] [DEBUG] ReviewService - Property Name: GuardId
+[2015-10-27 09:51:42.397] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.398] [DEBUG] ReviewService - Direct  Value 1
+[2015-10-27 09:51:42.398] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.398] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.399] [DEBUG] ReviewService - Retrived value5
+[2015-10-27 09:51:42.399] [DEBUG] ReviewService - Property Name: NodeId
+[2015-10-27 09:51:42.399] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.400] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.401] [DEBUG] ReviewService - Post Field Value 5
+[2015-10-27 09:51:42.402] [DEBUG] ReviewService - Post Direct  Value 5
+[2015-10-27 09:51:42.402] [DEBUG] ReviewService - Retrived value9
+[2015-10-27 09:51:42.403] [DEBUG] ReviewService - Property Name: OutputNodeId
+[2015-10-27 09:51:42.403] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.403] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.403] [DEBUG] ReviewService - Post Field Value 9
+[2015-10-27 09:51:42.404] [DEBUG] ReviewService - Post Direct  Value 9
+[2015-10-27 09:51:42.405] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.406] [DEBUG] ReviewService - Property Name: ConditionId
+[2015-10-27 09:51:42.406] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.406] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.406] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.407] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.407] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.410] [DEBUG] ReviewService - Property Name: RelationTypeId
+[2015-10-27 09:51:42.411] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.411] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.412] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.412] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.412] [DEBUG] ReviewService - Retrived valueFirstApprovalNodeSequential
+[2015-10-27 09:51:42.412] [DEBUG] ReviewService - Property Name: Type
+[2015-10-27 09:51:42.415] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.416] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.416] [DEBUG] ReviewService - Post Field Value FirstApprovalNodeSequential
+[2015-10-27 09:51:42.417] [DEBUG] ReviewService - Post Direct  Value FirstApprovalNodeSequential
+[2015-10-27 09:51:42.418] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.418] [DEBUG] ReviewService - Property Name: AccessType
+[2015-10-27 09:51:42.418] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.421] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.421] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.422] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.422] [DEBUG] ReviewService - Result Capture:1
+[2015-10-27 09:51:42.425] [DEBUG] ReviewService - {"GuardId" : "1", "NodeId" : "5", "OutputNodeId" : "9", "ConditionId" : "1", "RelationTypeId" : "1", "Type" : "FirstApprovalNodeSequential", "AccessType" : "1" }
+[2015-10-27 09:51:42.426] [DEBUG] ReviewService - [32m=====================================[39m
+[2015-10-27 09:51:42.427] [DEBUG] ReviewService - Load Group Role
+[2015-10-27 09:51:42.455] [INFO] ReviewService - {"GroupRelationId" : "3", "MasterGroupId" : "1", "RelativeGroupId" : "2", "DateUpdated" : "Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)", "Enabled" : "1", "RelationTypeId" : "1", "StartDate" : "Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)", "EndDate" : "null", "ApprovalProcessId" : "3", "GroupRoleWeight" : "null" }
+[2015-10-27 09:51:42.458] [DEBUG] ReviewService - Retrived value3
+[2015-10-27 09:51:42.458] [DEBUG] ReviewService - Property Name: GroupRelationId
+[2015-10-27 09:51:42.459] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.459] [DEBUG] ReviewService - Direct  Value 3
+[2015-10-27 09:51:42.459] [DEBUG] ReviewService - Post Field Value 3
+[2015-10-27 09:51:42.459] [DEBUG] ReviewService - Post Direct  Value 3
+[2015-10-27 09:51:42.459] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.462] [DEBUG] ReviewService - Property Name: MasterGroupId
+[2015-10-27 09:51:42.463] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.463] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.463] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.463] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.464] [DEBUG] ReviewService - Retrived value2
+[2015-10-27 09:51:42.464] [DEBUG] ReviewService - Property Name: RelativeGroupId
+[2015-10-27 09:51:42.467] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.467] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.468] [DEBUG] ReviewService - Post Field Value 2
+[2015-10-27 09:51:42.468] [DEBUG] ReviewService - Post Direct  Value 2
+[2015-10-27 09:51:42.468] [DEBUG] ReviewService - Retrived valueSat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.468] [DEBUG] ReviewService - Property Name: DateUpdated
+[2015-10-27 09:51:42.468] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.472] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.472] [DEBUG] ReviewService - Post Field Value Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.472] [DEBUG] ReviewService - Post Direct  Value Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.472] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.473] [DEBUG] ReviewService - Property Name: Enabled
+[2015-10-27 09:51:42.476] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.476] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.476] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.476] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.477] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.477] [DEBUG] ReviewService - Property Name: RelationTypeId
+[2015-10-27 09:51:42.477] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.480] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.480] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.481] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.481] [DEBUG] ReviewService - Retrived valueSat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.481] [DEBUG] ReviewService - Property Name: StartDate
+[2015-10-27 09:51:42.481] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.481] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.485] [DEBUG] ReviewService - Post Field Value Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.485] [DEBUG] ReviewService - Post Direct  Value Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)
+[2015-10-27 09:51:42.485] [DEBUG] ReviewService - Retrived valuenull
+[2015-10-27 09:51:42.485] [DEBUG] ReviewService - Property Name: EndDate
+[2015-10-27 09:51:42.486] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.489] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.490] [DEBUG] ReviewService - Post Field Value null
+[2015-10-27 09:51:42.490] [DEBUG] ReviewService - Post Direct  Value null
+[2015-10-27 09:51:42.490] [DEBUG] ReviewService - Retrived value3
+[2015-10-27 09:51:42.490] [DEBUG] ReviewService - Property Name: ApprovalProcessId
+[2015-10-27 09:51:42.490] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.491] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.494] [DEBUG] ReviewService - Post Field Value 3
+[2015-10-27 09:51:42.494] [DEBUG] ReviewService - Post Direct  Value 3
+[2015-10-27 09:51:42.494] [DEBUG] ReviewService - Retrived valuenull
+[2015-10-27 09:51:42.494] [DEBUG] ReviewService - Property Name: GroupRoleWeight
+[2015-10-27 09:51:42.494] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.495] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.495] [DEBUG] ReviewService - Post Field Value null
+[2015-10-27 09:51:42.498] [DEBUG] ReviewService - Post Direct  Value null
+[2015-10-27 09:51:42.499] [DEBUG] ReviewService - Result Capture:1
+[2015-10-27 09:51:42.502] [DEBUG] ReviewService - {"GroupRelationId" : "3", "MasterGroupId" : "1", "RelativeGroupId" : "2", "DateUpdated" : "Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)", "Enabled" : "1", "RelationTypeId" : "1", "StartDate" : "Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)", "EndDate" : "null", "ApprovalProcessId" : "3", "GroupRoleWeight" : "null" }
+[2015-10-27 09:51:42.503] [DEBUG] ReviewService - [32m=====================================[39m
+[2015-10-27 09:51:42.512] [DEBUG] ReviewService - Load Task Assignment History
+[2015-10-27 09:51:42.541] [INFO] ReviewService - {"TaskId" : "1", "GroupId" : "2", "NodeId" : "9", "DateUpdated" : "Fri Oct 09 2015 18:07:43 GMT+0100 (GMT Daylight Time)", "Outcome" : "Sucess", "TaskAssignmentHistoryId" : "4", "ApproverId" : "13", "ConditionTest" : "null" }
+[2015-10-27 09:51:42.545] [DEBUG] ReviewService - Retrived value1
+[2015-10-27 09:51:42.545] [DEBUG] ReviewService - Property Name: TaskId
+[2015-10-27 09:51:42.545] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.545] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.545] [DEBUG] ReviewService - Post Field Value 1
+[2015-10-27 09:51:42.546] [DEBUG] ReviewService - Post Direct  Value 1
+[2015-10-27 09:51:42.546] [DEBUG] ReviewService - Retrived value2
+[2015-10-27 09:51:42.546] [DEBUG] ReviewService - Property Name: GroupId
+[2015-10-27 09:51:42.546] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.547] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.547] [DEBUG] ReviewService - Post Field Value 2
+[2015-10-27 09:51:42.547] [DEBUG] ReviewService - Post Direct  Value 2
+[2015-10-27 09:51:42.547] [DEBUG] ReviewService - Retrived value9
+[2015-10-27 09:51:42.547] [DEBUG] ReviewService - Property Name: NodeId
+[2015-10-27 09:51:42.548] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.550] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.550] [DEBUG] ReviewService - Post Field Value 9
+[2015-10-27 09:51:42.550] [DEBUG] ReviewService - Post Direct  Value 9
+[2015-10-27 09:51:42.550] [DEBUG] ReviewService - Retrived valueFri Oct 09 2015 18:07:43 GMT+0100 (GMT Daylight Time)
+[2015-10-27 09:51:42.551] [DEBUG] ReviewService - Property Name: DateUpdated
+[2015-10-27 09:51:42.551] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.551] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.554] [DEBUG] ReviewService - Post Field Value Fri Oct 09 2015 18:07:43 GMT+0100 (GMT Daylight Time)
+[2015-10-27 09:51:42.554] [DEBUG] ReviewService - Post Direct  Value Fri Oct 09 2015 18:07:43 GMT+0100 (GMT Daylight Time)
+[2015-10-27 09:51:42.555] [DEBUG] ReviewService - Retrived valueSucess
+[2015-10-27 09:51:42.555] [DEBUG] ReviewService - Property Name: Outcome
+[2015-10-27 09:51:42.555] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.559] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.559] [DEBUG] ReviewService - Post Field Value Sucess
+[2015-10-27 09:51:42.559] [DEBUG] ReviewService - Post Direct  Value Sucess
+[2015-10-27 09:51:42.559] [DEBUG] ReviewService - Retrived value4
+[2015-10-27 09:51:42.559] [DEBUG] ReviewService - Property Name: TaskAssignmentHistoryId
+[2015-10-27 09:51:42.560] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.560] [DEBUG] ReviewService - Direct  Value 4
+[2015-10-27 09:51:42.563] [DEBUG] ReviewService - Post Field Value 4
+[2015-10-27 09:51:42.563] [DEBUG] ReviewService - Post Direct  Value 4
+[2015-10-27 09:51:42.563] [DEBUG] ReviewService - Retrived value13
+[2015-10-27 09:51:42.564] [DEBUG] ReviewService - Property Name: ApproverId
+[2015-10-27 09:51:42.564] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.564] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.564] [DEBUG] ReviewService - Post Field Value 13
+[2015-10-27 09:51:42.567] [DEBUG] ReviewService - Post Direct  Value 13
+[2015-10-27 09:51:42.567] [DEBUG] ReviewService - Retrived valuenull
+[2015-10-27 09:51:42.568] [DEBUG] ReviewService - Property Name: ConditionTest
+[2015-10-27 09:51:42.568] [DEBUG] ReviewService - Field Value 
+[2015-10-27 09:51:42.568] [DEBUG] ReviewService - Direct  Value 
+[2015-10-27 09:51:42.568] [DEBUG] ReviewService - Post Field Value null
+[2015-10-27 09:51:42.568] [DEBUG] ReviewService - Post Direct  Value null
+[2015-10-27 09:51:42.572] [DEBUG] ReviewService - Result Capture:1
+[2015-10-27 09:51:42.572] [DEBUG] ReviewService - {"TaskId" : "1", "GroupId" : "2", "NodeId" : "9", "DateUpdated" : "Fri Oct 09 2015 18:07:43 GMT+0100 (GMT Daylight Time)", "Outcome" : "Sucess", "TaskAssignmentHistoryId" : "4", "ApproverId" : "13", "ConditionTest" : "null" }
+[2015-10-27 09:51:42.576] [DEBUG] ReviewService - [32m=====================================[39m
+[2015-10-27 09:51:42.577] [DEBUG] ReviewService - { Fields: 
+   { TaskId: '',
+     DateAssigned: '',
+     GroupId: '',
+     AccessType: '',
+     NodeId: '' },
+  TaskId: 1,
+  DateAssigned: '',
+  GroupId: '3',
+  AccessType: '',
+  NodeId: '',
+  TableName: 'TaskAssignment',
+  Keys: [ 'TaskId', 'GroupId' ] }
+[2015-10-27 09:51:42.585] [DEBUG] ReviewService - { Fields: 
+   { TaskId: '1',
+     DateUpdated: 'Mon Oct 26 2015 15:54:05 GMT+0000 (GMT Standard Time)',
+     Status: 'I',
+     RaiserUserId: '1',
+     ApprovalProcessType: '3' },
+  TaskId: '1',
+  DateUpdated: 'Mon Oct 26 2015 15:54:05 GMT+0000 (GMT Standard Time)',
+  Status: 'I',
+  RaiserUserId: '1',
+  ApprovalProcessType: '3',
+  TableName: 'Task',
+  Keys: [ 'TaskId' ] }
+[2015-10-27 09:51:42.594] [DEBUG] ReviewService - { Fields: 
+   { ApprovalProcessId: '3',
+     StartNodeId: '1',
+     ApprovalType: 'Sequential',
+     CompanyId: '1',
+     FunctionId: '1',
+     ProductId: '1',
+     RegionId: '1' },
+  ApprovalProcessId: '3',
+  StartNodeId: '1',
+  ApprovalType: 'Sequential',
+  CompanyId: '1',
+  FunctionId: '1',
+  ProductId: '1',
+  RegionId: '1',
+  TableName: 'ApprovalProcessTypes',
+  Keys: [ 'ApprovalProcessId' ] }
+[2015-10-27 09:51:42.603] [DEBUG] ReviewService - { Fields: 
+   { ConditionId: '1',
+     ConditionTest: 'Success',
+     ConditionDescription: 'Submission Success' },
+  ConditionId: '1',
+  ConditionTest: 'Success',
+  ConditionDescription: 'Submission Success',
+  TableName: 'BranchCondition',
+  Keys: [ 'ConditionId' ] }
+[2015-10-27 09:51:42.612] [DEBUG] ReviewService - { Fields: 
+   { GuardId: '1',
+     NodeId: '5',
+     OutputNodeId: '9',
+     ConditionId: '1',
+     RelationTypeId: '1',
+     Type: 'FirstApprovalNodeSequential',
+     AccessType: '1' },
+  GuardId: '1',
+  NodeId: '5',
+  OutputNodeId: '9',
+  ConditionId: '1',
+  RelationTypeId: '1',
+  Type: 'FirstApprovalNodeSequential',
+  AccessType: '1',
+  TableName: 'BranchNode',
+  Keys: [ 'GuardId' ] }
+[2015-10-27 09:51:42.621] [DEBUG] ReviewService - GroupRoleRelation {
+  Fields: 
+   { GroupRelationId: '3',
+     MasterGroupId: '1',
+     RelativeGroupId: '2',
+     DateUpdated: 'Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)',
+     Enabled: '1',
+     RelationTypeId: '1',
+     StartDate: 'Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)',
+     EndDate: 'null',
+     ApprovalProcessId: '3',
+     GroupRoleWeight: 'null' },
+  GroupRelationId: '3',
+  MasterGroupId: '1',
+  RelativeGroupId: '2',
+  DateUpdated: 'Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)',
+  Enabled: '1',
+  RelationTypeId: '1',
+  StartDate: 'Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)',
+  EndDate: 'null',
+  ApprovalProcessId: '3',
+  GroupRoleWeight: 'null',
+  TableName: 'GroupRoleRelation',
+  Keys: [ 'GroupRelationId' ] }
+[2015-10-27 09:51:42.639] [DEBUG] ReviewService - { Fields: 
+   { TaskId: '1',
+     GroupId: '2',
+     NodeId: '9',
+     DateUpdated: 'Fri Oct 09 2015 18:07:43 GMT+0100 (GMT Daylight Time)',
+     Outcome: 'Sucess',
+     TaskAssignmentHistoryId: '4',
+     ApproverId: '13',
+     ConditionTest: 'null' },
+  TaskId: '1',
+  GroupId: '2',
+  NodeId: '9',
+  DateUpdated: 'Fri Oct 09 2015 18:07:43 GMT+0100 (GMT Daylight Time)',
+  Outcome: 'Sucess',
+  TaskAssignmentHistoryId: '4',
+  ApproverId: '13',
+  ConditionTest: 'null',
+  TableName: 'TaskAssignmentHistory',
+  Keys: [ 'TaskAssignmentHistoryId' ] }
+[2015-10-27 09:51:42.648] [DEBUG] ReviewService - { Fields: 
+   { GroupId: '3',
+     PersonId: '4',
+     DateUpdated: 'Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)',
+     Enabled: '1',
+     StartDate: 'null',
+     EndDate: 'null' },
+  GroupId: '3',
+  PersonId: '4',
+  DateUpdated: 'Sat Jan 01 2000 00:00:00 GMT+0000 (GMT Standard Time)',
+  Enabled: '1',
+  StartDate: 'null',
+  EndDate: 'null',
+  TableName: 'UserGroup',
+  Keys: [ 'GroupId' ] }

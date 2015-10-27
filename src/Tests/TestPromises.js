@@ -1,3 +1,7 @@
+//Test how promises string together
+//And also how to pass values back from them
+//Plus querying the database :-)
+
 var Q = require('Q');
 var database = require('../TediousDatabase.js');
 var db = new database();
@@ -42,7 +46,25 @@ function three() {
     return deferred.promise;
 }
 
-console.log("being");
+function four() {
+    var deferred = Q.defer();
+    console.log("Starting four");
+    db.ConnectAndQuery("select * from TaskAssignment", function () {
+        console.log('Finished with four. Ready to call next and say "all done".');
+        deferred.resolve("all done");
+    });
+    return deferred.promise;
+}
 
-one()
-    .then(two).then(three);
+function five(takeinvalue) {
+    console.log("=====================================================================");
+    console.log(takeinvalue);
+    console.log("=====================================================================");
+}
+
+console.log("being");
+//Original Tests
+//one().then(two).then(three);
+
+//Passing parameters tests
+four().then(five);

@@ -1,3 +1,5 @@
+//How to iterate over an array using the map method
+
 var kays = [
     {
         TaskId: 1

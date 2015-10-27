@@ -1,3 +1,5 @@
+//Test the string format library
+
 var sprint = require('../library/stringfunctions.js');
 
 var newString = new sprint();

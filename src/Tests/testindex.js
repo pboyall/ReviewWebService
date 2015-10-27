@@ -1,3 +1,6 @@
+//Tests loading a class from the repository and starting the web service
+
+
 'use strict';
 var database = require('../SqlliteDatabase.js');
 var express = require('express');

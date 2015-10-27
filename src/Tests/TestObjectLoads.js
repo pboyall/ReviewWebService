@@ -1,3 +1,5 @@
+//Verify all the objects in the domain can be loaded from the database using the repository
+
 'use strict';
 var chalk = require('chalk');
 var logger = require('../logger');
@@ -267,6 +269,9 @@ var runRestOfServer = function () {
                 objArray.push(UG);
                 for (var index in objArray) {
                     var theObject = objArray[index];
+                    //TODO - Write some asserts so we can automatically compare these results out
+
+
                     log.debug(theObject);
                     //for (var property in theObject.Fields) {
                     //  log.debug("property");
