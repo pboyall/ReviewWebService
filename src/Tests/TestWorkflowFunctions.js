@@ -16,11 +16,11 @@ var deferred1 = Q.defer();
 //errors cause the promise to be rejected with the error as the reason
 
 
-w.InitialiseWorkflow(1, 3)
-    .then();
+wff.getStartNode(3);
+//.then();
 
 
-
+return deferred1.promise;
 /*
 
     var captureresults = function (rows, rowCount) {

@@ -1,8 +1,10 @@
+//Test loading a Task Object from the repository
+
 require("babel/register");
 
-var database = require('./TediousDatabase.js');
-var taskRepository = require('./TaskRepository.js');
-var theTask = require('./Model/Task.js');
+var database = require('../TediousDatabase.js');
+var taskRepository = require('../TaskRepository.js');
+var theTask = require('../Model/Task.js');
 
 console.log('Initialise');
 

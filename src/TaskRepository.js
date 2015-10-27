@@ -111,6 +111,7 @@ var taskRepository =
             for (var pop in rowsobj) {
                 console.log(pop + ":" + rowsobj[pop]);
             }
+            //Think there is a javascript issue with using "property" - something about no guarantee of order?
             for (var property in theObject.Fields) {
                 log.debug("Retrived value" + rowsobj[property]);
                 log.debug("Property Name: " + property);
@@ -166,8 +167,9 @@ var taskRepository =
                 console.log("RETVAL" + rows);
                 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + theObject);
                 callme(rows, rowCount);
+                //Return the values from here if necessary using deferred.resolve(values); 
                 deferred.resolve();
-                //Populate the object perhaps?
+
                 //rows contains the JSON result
                 //{TaskId : 1,DateUpdated : Fri Oct 09 2015 17:44:56 GMT+0100 (GMT Daylight Time),Status : I,RaiserUserId : 1,ApprovalProcessType: 3
             };
@@ -190,6 +192,9 @@ var taskRepository =
             console.log(sql);
 
             var resolvePromise = function (rows, rowCount) {
+
+
+
                 deferred.resolve();
                 //Not sure this is right thing to return
                 callme(rows, rowCount);

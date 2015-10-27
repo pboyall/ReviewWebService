@@ -4861,3 +4861,73 @@
   EndDate: 'null',
   TableName: 'UserGroup',
   Keys: [ 'GroupId' ] }
+[2015-10-27 17:00:44.724] [INFO] ReviewService - Return row1
+[2015-10-27 17:00:44.732] [INFO] ReviewService - Return row1
+[2015-10-27 17:02:03.130] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:02:03.131] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:02:03.141] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:02:03.142] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:02:35.425] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:02:35.426] [INFO] ReviewService - [32mGet Property: StartNode[39m
+[2015-10-27 17:02:35.427] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:02:35.435] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:02:35.435] [INFO] ReviewService - [32mGet Property: StartNode[39m
+[2015-10-27 17:02:35.436] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:05:52.964] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:05:52.965] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:05:52.965] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:05:52.966] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:05:52.976] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:05:52.976] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:05:52.977] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:05:52.977] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:06:13.667] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:06:13.668] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:06:13.669] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:06:13.669] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:06:13.669] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:06:13.679] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:06:13.679] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:06:13.680] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:06:13.680] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:06:13.680] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:08:37.298] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:08:37.299] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:08:37.300] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:08:37.300] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:08:37.300] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:08:37.308] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:08:37.308] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:08:37.309] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:08:37.309] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:08:37.309] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:08:50.832] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:08:50.833] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:08:50.834] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:08:50.834] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:08:50.834] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:08:50.842] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:08:50.842] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:08:50.843] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:08:50.843] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:08:50.843] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:11:58.016] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:11:58.017] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:11:58.018] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:11:58.018] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:11:58.019] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:11:58.028] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:11:58.028] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:11:58.029] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:11:58.029] [INFO] ReviewService - [37mGet Property: StartNode[39m
+[2015-10-27 17:11:58.030] [INFO] ReviewService - [32mStart Node is : undefined[39m
+[2015-10-27 17:12:26.115] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:12:26.116] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:12:26.117] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:12:26.117] [INFO] ReviewService - [37mGet Property: StartNodeId[39m
+[2015-10-27 17:12:26.118] [INFO] ReviewService - [32mStart Node is : 1[39m
+[2015-10-27 17:12:26.133] [INFO] ReviewService - Return row number 1
+[2015-10-27 17:12:26.133] [INFO] ReviewService - [94mrows : {"StartNodeId" : "1" }[39m
+[2015-10-27 17:12:26.133] [INFO] ReviewService - [94mparsed JSON : [object Object][39m
+[2015-10-27 17:12:26.134] [INFO] ReviewService - [37mGet Property: StartNodeId[39m
+[2015-10-27 17:12:26.134] [INFO] ReviewService - [32mStart Node is : 1[39m

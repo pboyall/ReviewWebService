@@ -2,7 +2,7 @@
 
 'use strict';
 var chalk = require('chalk');
-var logger = require('../logger');
+var logger = require('../logger.js');
 //Database Handler (can plug in SqlliteDatabase.js instead)
 var database = require('../TediousDatabase.js');
 //Provides promises to handle sync/async issues

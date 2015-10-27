@@ -50,10 +50,10 @@ module.exports.InitialiseWorkflow = function (UserId, ApprovalProcessId) {
     var captureresults = function (rows, rowCount) {
         console.log("Result Capture: " + rowCount + " row returned");
         console.log(rows);
-        console.log("Start Node ID = ");
-        console.log(rows.StartNodeId);
+        //console.log("Start Node ID = ");
+        //console.log(rows.StartNodeId);
         console.log("=====================================");
-        deferred.resolve();
+        deferred.resolve(rows);
     };
 
     taskrepo.load(AP, captureresults)
@@ -71,7 +71,7 @@ module.exports.InitialiseWorkflow = function (UserId, ApprovalProcessId) {
             }
         );
 
-    sSQL = wff.getStartNode(ApprovalProcessId);
+    startNode = wff.getStartNode(ApprovalProcessId);
     //    db.ConnectAndQuery(sSQL, useresult);
 
     var useresult = function (rows, rowCount) {

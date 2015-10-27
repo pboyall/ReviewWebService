@@ -37,6 +37,18 @@ database.prototype.getConnection = function getConnection() {
     return connection;
 };
 
+database.prototype.deferredQuery = function deferredQuery(sql, property, callback) {
+    var deferred = Qq.defer();
+    var resolvePromise = function (rows, rowCount) {
+        console.log("Deferred Property " + property);
+        callback(rows, rowCount, property);
+        //Return the values from here if necessary using deferred.resolve(values); 
+        deferred.resolve(rows);
+    };
+    this.ConnectAndQuery(sql, resolvePromise);
+    return deferred.promise;
+};
+
 database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
     console.log('Connect and Query SQL: ' + sql);
     if (!pooling) {
