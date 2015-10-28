@@ -230,7 +230,7 @@ function executeStatement(sql, callback) {
 
 
 
-
+//Insert using parameters and does a promise thing too!
 
 function executeInsert(sql, parameters, callback) {
     console.log('execute insert');
@@ -250,13 +250,13 @@ function executeInsert(sql, parameters, callback) {
                         console.log("promises fulfilled");
                         var queryMessage = promiseQueryData.value;
                         console.log(queryMessage);
-                        callback();
+                        callback(queryMessage);
                     } else {
                         console.log("promises state not fulfilled");
                     }
                 } catch (ex) {
                     console.log(ex);
-                    callback();
+                    callback(ex + queryMessage);
                 }
             });
 
@@ -282,9 +282,9 @@ function executeInsert(sql, parameters, callback) {
                     } else {
                         //When rowcount is greater than 0 then rowCount represents the number of records updated.
                         console.log("Request Complete");
-                        console.log('Request OK your done rowCount: ' + rowCount);
+                        console.log('Request OK you are done rowCount: ' + rowCount);
                         connection.release();
-                        deferred.resolve("Query Complete" + rowCount);
+                        deferred.resolve(rowCount);
                     }
                 });
                 for (var property in insertParameters) {

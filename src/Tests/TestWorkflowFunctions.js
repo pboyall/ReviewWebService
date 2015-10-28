@@ -3,8 +3,6 @@
 var wff = require('../WorkflowFunctions.js');
 var w = require('../Workflow.js');
 var Q = require('Q');
-console.log(wff.getStartNode(3));
-console.log(wff.Initialise(1, 3));
 
 var deferred1 = Q.defer();
 //Promises
@@ -24,7 +22,10 @@ wff.getStartNode(3).then(function (value) {
 wff.getStartNode1(3).then(function (value) {
     console.log(value);
     console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
-});
+}).then(wff.Initialise(1, 3).then(function (value) {
+    console.log(value);
+    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+}));
 
 
 return deferred1.promise;
