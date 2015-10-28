@@ -67,4 +67,86 @@ console.log("being");
 //one().then(two).then(three);
 
 //Passing parameters tests
-four().then(five);
+//four().then(five);
+
+//This one calls a synchronous non-deferred function
+function callSyncFunction() {
+    var deferred = Q.defer();
+    notDeferred();
+    return deferred.promise;
+}
+
+//This one calls an asynchronous non-deferred function
+function callsASyncFunction() {
+    var deferred = Q.defer();
+    db.ConnectAndQuery("select * from UserGroup", function () {
+        console.log('Finished with non deffered async.');
+    });
+    return deferred.promise;
+}
+
+//This one uses fcall to execute an asynchronous non-deferred function
+function fcallsASyncFunction() {
+    var deferred = Q.defer();
+    Q.fcall(db.ConnectAndQuery, "select * from UserGroup", function () {
+        console.log('Finished with non deffered async.');
+    });
+    return deferred.promise;
+}
+
+function nfcallsASyncFunction() {
+    var deferred = Q.defer();
+    Q.nfcall(db.ConnectAndQuery, "select * from UserGroup", function () {
+        console.log('Finished with non deffered async.');
+    });
+    return deferred.promise;
+}
+
+//var dbc = db.ConnectAndQuery("select * from UserGroup", function () {
+//    console.log('Finished with non deffered async.');
+//});
+//Doesn 't help
+//dbn = Q.denodeify(db.ConnectAndQuery(sql, callback));
+//Also not helpful as format is wrong var dbn = Q.nbind(db.ConnectAndQuery);
+//var dbn = Q.fcall(db.ConnectAndQuery);
+
+function def1() {
+    var deferred = Q.defer();
+    //    db.ConnectAndQuery("select * from UserGroup", function () {
+    //        console.log('Finished with non deffered async.');
+    //    });
+    db.deferredQuery("select top 1 * from UserGroup", "GroupId", function () {
+        console.log('Finished with non deffered async.');
+        deferred.resolve();
+    });
+    return deferred.promise;
+}
+
+
+
+function notDeferred() {
+    console.log('non deferred function');
+}
+
+
+function isDeferred() {
+    console.log('is deferred function');
+}
+
+//Test not Deffered 
+//Doesn't call "three"
+//callSyncFunction().then(three);
+//This doesn't call three either as again the non-deferred function never resolves the promise
+//callsASyncFunction().then(three);
+
+//get a resolution - this seems to call the fcall function twice?
+//fcallsASyncFunction().then(three);
+
+//Try using node function mapper - only calls the function once but doesn't resolve and call three
+//nfcallsASyncFunction().then(three);
+
+//nodeifycallsASyncFunction().then(isDeferred);
+
+//dbn("select * from UserGroup", notDeferred).then(isDeferred);
+
+def1();

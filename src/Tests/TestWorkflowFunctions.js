@@ -14,10 +14,17 @@ var deferred1 = Q.defer();
 //Called as functions - no "this"
 //"then" returns a promise
 //errors cause the promise to be rejected with the error as the reason
+/*
+wff.getStartNode(3).then(function (value) {
+    console.log(value);
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+});
+*/
 
-
-wff.getStartNode(3);
-//.then();
+wff.getStartNode1(3).then(function (value) {
+    console.log(value);
+    console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+});
 
 
 return deferred1.promise;

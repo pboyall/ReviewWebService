@@ -68,6 +68,7 @@ database.prototype.ConnectAndQuery = function ConnectAndQuery(sql, callback) {
             console.log("Debug Connecting: " + text);
         });
     } else {
+        console.log("Pooled Version running" + sql + "  " + typeof callback);
         executePooledStatement(sql, callback);
     }
 
